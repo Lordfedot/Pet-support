@@ -1,9 +1,11 @@
 import { FC } from "react";
+import Logo from "./Logo";
+
 
 const Header: FC = () => {
   return (
     <header>
-      <p>header</p>
+      <Logo/>
     </header>
   );
 };
