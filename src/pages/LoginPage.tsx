@@ -1,7 +1,7 @@
-import { FC } from "react"
 
 
-const LoginPage: FC = () => {
+
+const LoginPage = () => {
     return <></>
 }
 

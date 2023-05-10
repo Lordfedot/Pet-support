@@ -1,7 +1,7 @@
-import {FC} from 'react'
 
 
-const RegisterPage: FC = () => {
+
+const RegisterPage = () => {
     return <p></p>
 }
 

@@ -1,6 +1,6 @@
-import { FC } from "react"
 
-const OurFriendsPage: FC = () => {
+
+const OurFriendsPage = () => {
     return <></>
 }
 

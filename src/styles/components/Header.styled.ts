@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import device from "../../components/helpers/devices";
+import device from "../../helpers/devices";
 export const BoxHeader = styled.header`
   display: flex;
   align-items: center;

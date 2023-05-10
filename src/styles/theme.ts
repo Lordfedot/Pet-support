@@ -13,4 +13,5 @@ export const theme: ITheme = {
     bold: '700px',
     normal: '500px'
   },
+  radius: '20px'
 };

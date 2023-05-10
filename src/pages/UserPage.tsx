@@ -1,8 +1,8 @@
-import { FC } from "react"
 
 
 
-const UserPage: FC = () => {
+
+const UserPage = () => {
     return <></>
 }
 

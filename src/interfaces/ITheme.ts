@@ -10,4 +10,5 @@ export interface ITheme {
     bold: string;
     normal: string;
   };
+  radius: string
 }

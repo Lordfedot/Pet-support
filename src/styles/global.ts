@@ -15,7 +15,9 @@ h6 {
   margin: 0;
   padding: 0;
 }
-
+button{
+  padding: 0;
+}
 ul,
 ol {
   margin: 0;

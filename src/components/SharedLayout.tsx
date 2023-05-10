@@ -1,9 +1,9 @@
 import Header from "./Header";
-import { FC, Suspense } from "react";
+import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { Container } from "../styles/components/Container.styled";
 import { Section } from "../styles/components/Section.styled";
-const SharedLayout: FC = () => {
+const SharedLayout = () => {
   return (
     <Container>
       <Header />

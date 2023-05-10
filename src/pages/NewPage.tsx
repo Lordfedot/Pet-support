@@ -1,7 +1,7 @@
-import { FC } from "react"
 
 
-const NewsPage: FC = () => {
+
+const NewsPage= () => {
     return <></>
 }
 
