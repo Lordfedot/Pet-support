@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import device from "../../components/helpers/devices";
-export const Section = styled.section`
-  padding-top: 40px;
-  padding-bottom: 100px;
-
+export const BoxHeader = styled.header`
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  padding-top: 16px;
   @media ${device.tablet} {
-    padding-top: 90px;
+    padding-top: 26px;
   }
   @media ${device.desktop} {
-    padding-top: 70px;
-    padding-bottom: 200px;
+    padding-top: 20px;
   }
 `;

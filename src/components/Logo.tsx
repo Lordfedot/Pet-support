@@ -3,7 +3,7 @@ import { FirstColor, SecondColor } from "../styles/components/Logo.styled";
 
 const Logo = () => {
   return (
-    <Link to={'/'}>
+    <Link to={"/"}>
       <FirstColor>
         pet<SecondColor>l</SecondColor>y
       </FirstColor>

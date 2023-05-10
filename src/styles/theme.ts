@@ -13,9 +13,4 @@ export const theme: ITheme = {
     bold: '700px',
     normal: '500px'
   },
-  media: {
-    desktop: '1280px',
-    tablet: '768px',
-    mobile: '320px',
-  },
 };

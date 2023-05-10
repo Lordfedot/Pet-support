@@ -30,6 +30,7 @@ img {
 }
 
 a {
+  color: inherit;
   text-decoration: none;
 }
 
