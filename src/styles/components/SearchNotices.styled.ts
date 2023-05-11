@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { Input } from "./Input.styled";
 import device from "../../helpers/devices";
-
+import { AiOutlineSearch } from "react-icons/ai";
+import { RxCrossCircled } from "react-icons/rx";
 
 export const SearchNoticesWrapper = styled.div`
   position: relative;
@@ -12,31 +13,30 @@ export const SearchNoticesWrapper = styled.div`
   @media ${device.tablet} {
     margin-top: 40px;
   }
-  .cross {
-    display: none;
-  }
-  :focus-within .search {
-    display: none;
-  }
-  :focus-within input {
-    outline: 1px solid rgba(245, 146, 86, 0.5);
-  }
-  :focus-within .cross {
-    display: block;
-  }
 `;
 export const SearchNoticesInput = styled(Input)`
+  font-size: 16px;
+  line-height: 22px;
+
+  padding-right: 34px;
   border: none;
-  outline: none;
   width: 100%;
+
+  @media ${device.tablet} {
+    font-size: 20px;
+    line-height: 27px;
+  }
+  &:focus {
+    outline: 1px solid rgba(245, 146, 86, 0.5);
+  }
 `;
 
 export const CrossButton = styled.button`
   background-color: transparent;
   border: none;
   position: absolute;
-  bottom: 8px;
-  right: 12px;
+  bottom: 14px;
+  right: 14px;
   cursor: pointer;
 
   width: 15px;
@@ -50,4 +50,14 @@ export const CrossButton = styled.button`
   }
 `;
 
-
+export const AiOutlineSearchStyled = styled(AiOutlineSearch)`
+  color: inherit;
+  width: 100%;
+  height: 100%;
+`;
+export const RxCrossCircledStyled = styled(RxCrossCircled)`
+  pointer-events: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+`;

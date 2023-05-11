@@ -16,6 +16,8 @@ h6 {
   padding: 0;
 }
 button{
+  font-family: inherit;
+  font-weight: inherit;
   padding: 0;
 }
 ul,
@@ -38,13 +40,20 @@ a {
 
 input,
 textarea {
+  font-family:inherit;
+  font-size: inherit;
   background-color: transparent;
   outline: none;
+  ::placeholder{
+    font-family:inherit;
+    font-size: inherit;
+  }
 }
 
   body {
     margin: 0;
   font-family: 'Manrope', sans-serif;
+  font-weight: 500;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

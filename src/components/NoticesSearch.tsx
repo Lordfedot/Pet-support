@@ -3,12 +3,13 @@ import {
   SearchNoticesInput,
   SearchNoticesWrapper,
   CrossButton,
+  AiOutlineSearchStyled,
+  RxCrossCircledStyled,
 } from "../styles/components/SearchNotices.styled";
-import { AiOutlineSearch } from "react-icons/ai";
-import { RxCrossCircled } from "react-icons/rx";
 
 const NoticesSearch = () => {
   const [value, setValue] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -16,16 +17,17 @@ const NoticesSearch = () => {
   return (
     <SearchNoticesWrapper>
       <SearchNoticesInput
+        onFocus={() => setIsActive(true)}
+        onBlur={() => setIsActive(false)}
         autoFocus
-        maxLength={40}
         value={value}
         onChange={handleInputChange}
         placeholder="Search"
       ></SearchNoticesInput>
-      <CrossButton onClick={() => setValue("")}>
-        <RxCrossCircled size={"100%"} color="inherit" className="cross" />
-        <AiOutlineSearch size={"100%"} color="inherit" className="search" />
+      <CrossButton type="button" className="button" onClick={() => setValue('')}>
+        {isActive ?<RxCrossCircledStyled />  : <AiOutlineSearchStyled />}
       </CrossButton>
+
     </SearchNoticesWrapper>
   );
 };
