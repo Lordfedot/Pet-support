@@ -1,26 +1,24 @@
-import {
-  NoticesNavList,
-  NoticesNavButton,
-} from "../styles/components/NoticesCategoriesNav.styled";
+import { NoticesNavList } from "../styles/components/NoticesCategoriesNav.styled";
 import { useState } from "react";
+import { Button } from "../styles/components/Button.styled";
 
 type Props = {
   children: string;
 };
 
-const Button = ({ children }: Props) => {
+const CategoriesButton = ({ children }: Props) => {
   const [isActive, setIsActive] = useState(false);
 
   const toggleCLass = isActive ? "active" : null;
 
   return (
-    <NoticesNavButton
+    <Button
       onClick={() => setIsActive(!isActive)}
       className={`${toggleCLass}`}
       type="button"
     >
       {children}
-    </NoticesNavButton>
+    </Button>
   );
 };
 
@@ -28,13 +26,13 @@ const NoticesCategoriesNav = () => {
   return (
     <NoticesNavList>
       <li>
-        <Button>sell</Button>
+        <CategoriesButton>sell</CategoriesButton>
       </li>
       <li>
-        <Button>lost/found</Button>
+        <CategoriesButton>lost/found</CategoriesButton>
       </li>
       <li>
-        <Button>in good hands</Button>
+        <CategoriesButton>in good hands</CategoriesButton>
       </li>
     </NoticesNavList>
   );

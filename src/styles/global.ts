@@ -51,6 +51,7 @@ textarea {
 }
 
   body {
+    background-color: #FDF7F2;
     margin: 0;
   font-family: 'Manrope', sans-serif;
   font-weight: 500;

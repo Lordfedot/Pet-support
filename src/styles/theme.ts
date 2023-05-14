@@ -3,6 +3,7 @@ import { ITheme } from "../interfaces/ITheme";
 export const theme: ITheme = {
   colors: {
     primary: "#F59256",
+    secondary: '#FF6101',
     
     white: '#FFFFFF',
     grey: 'rgba(17, 17, 17, 0.6)',

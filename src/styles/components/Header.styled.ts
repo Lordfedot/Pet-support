@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import device from "../../helpers/devices";
 import { GiHamburgerMenu } from "react-icons/gi";
+
+export const TabletWrapper = styled.div`
+  display: flex;
+  gap: 25px;
+`
 export const BoxHeader = styled.header`
   display: flex;
   align-items: center;
@@ -11,7 +16,6 @@ export const BoxHeader = styled.header`
     padding-top: 26px;
   }
   @media ${device.desktop} {
-    justify-content: start;
     padding-top: 20px;
     gap: 80px;
   }

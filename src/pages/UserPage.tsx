@@ -3,7 +3,7 @@
 
 
 const UserPage = () => {
-    return <></>
+    return <>user</>
 }
 
 export default UserPage

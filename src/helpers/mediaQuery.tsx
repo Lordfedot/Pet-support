@@ -14,6 +14,6 @@ export const Tablet = ({ children }: Props) => {
   return <>{isTablet ? children : null}</>;
 };
 export const Mobile = ({ children }: Props) => {
-  const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 1279 });
+  const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 767 });
   return <>{isMobile ? children : null}</>;
 };

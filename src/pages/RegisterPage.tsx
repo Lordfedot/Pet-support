@@ -2,7 +2,7 @@
 
 
 const RegisterPage = () => {
-    return <p></p>
+    return <p>register</p>
 }
 
 export default RegisterPage

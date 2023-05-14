@@ -16,15 +16,13 @@ export const BurgerLayout = styled.div`
   width: 100%;
   height: 100%;
 
-  background-color: azure;
+  background-color: ${({theme}) => theme.colors.bg};
 `;
 
 
 export const BurgerCloseButton = styled.button`
+cursor: pointer;
   display: flex;
-  /* position: absolute;
-  top: 10px;
-  right: 10px; */
   border: none;
   background-color: transparent;
 `;

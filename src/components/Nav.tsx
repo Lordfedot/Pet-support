@@ -1,17 +1,18 @@
-import { Link } from "react-router-dom";
-import { NavigationList,NavigationItem } from "../styles/components/Nav.styled";
+
+import { NavigationList,NavigationItem,StyledNavLink } from "../styles/components/Nav.styled";
+
 const Nav = () => {
   return (
     <nav>
       <NavigationList>
         <NavigationItem>
-          <Link to={"/news"}>News</Link>
+          <StyledNavLink to={"/news"}>News</StyledNavLink>
         </NavigationItem>
         <NavigationItem>
-          <Link to={"/notices"}>Find pet</Link>
+          <StyledNavLink to={"/notices"}>Find pet</StyledNavLink>
         </NavigationItem>
         <NavigationItem>
-          <Link to={"/friends"}>Our friends</Link>
+          <StyledNavLink to={"/friends"}>Our friends</StyledNavLink>
         </NavigationItem>
       </NavigationList>
     </nav>
