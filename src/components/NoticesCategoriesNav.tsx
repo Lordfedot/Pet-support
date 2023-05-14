@@ -1,40 +1,39 @@
-import { NoticesNavList } from "../styles/components/NoticesCategoriesNav.styled";
+import {
+  NoticesNavWrapper,
+  AddPetButton,
+  StyledAiOutlinePlus,
+  AddPetWrapper,
+} from "../styles/components/NoticesCategoriesNav.styled";
 import { useState } from "react";
-import { Button } from "../styles/components/Button.styled";
-
-type Props = {
-  children: string;
-};
-
-const CategoriesButton = ({ children }: Props) => {
-  const [isActive, setIsActive] = useState(false);
-
-  const toggleCLass = isActive ? "active" : null;
-
-  return (
-    <Button
-      onClick={() => setIsActive(!isActive)}
-      className={`${toggleCLass}`}
-      type="button"
-    >
-      {children}
-    </Button>
-  );
-};
-
+import { Modal } from "./Modal";
+import NoticesCategoriesNavList from "./NoticesCategoriesNavList";
+import { Mobile, TablerOrDesctop } from "../helpers/mediaQuery";
 const NoticesCategoriesNav = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <NoticesNavList>
-      <li>
-        <CategoriesButton>sell</CategoriesButton>
-      </li>
-      <li>
-        <CategoriesButton>lost/found</CategoriesButton>
-      </li>
-      <li>
-        <CategoriesButton>in good hands</CategoriesButton>
-      </li>
-    </NoticesNavList>
+    <NoticesNavWrapper>
+      <NoticesCategoriesNavList />
+
+      <TablerOrDesctop>
+        <AddPetWrapper>
+          <p>Add pet</p>
+          <AddPetButton onClick={() => setShowModal(true)}>
+            <StyledAiOutlinePlus />
+          </AddPetButton>
+        </AddPetWrapper>
+      </TablerOrDesctop>
+
+      <Mobile>
+        <AddPetButton onClick={() => setShowModal(true)}>
+          <StyledAiOutlinePlus />
+          Add pet
+        </AddPetButton>
+      </Mobile>
+      <Modal setShowModal={setShowModal} showModal={showModal}>
+        g
+      </Modal>
+    </NoticesNavWrapper>
   );
 };
 
