@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import device from "../../helpers/devices";
 export const NavigationList = styled.ul`
-  display: none;
   @media ${device.desktop} {
     display: flex;
     gap: 80px;

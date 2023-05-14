@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ModalLayout = styled.div`
+export const ModalBackdrop = styled.div`
   position: fixed;
   bottom: 0;
   right: 0;

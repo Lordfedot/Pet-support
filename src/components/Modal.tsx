@@ -1,5 +1,5 @@
 import {
-  ModalLayout,
+  ModalBackdrop,
   ModalContent,
   CloseButton,
 } from "../styles/components/Modal.style";
@@ -16,11 +16,17 @@ type Props = {
 };
 
 export const Modal = ({ children, showModal, setShowModal }: Props) => {
-  const hadnleOnEscapeClose = useCallback((e: any) => {
-    if (e.code === "Escape") {
-      setShowModal(false);
-    }
-},[setShowModal])
+  useEffect(() => {
+    document.body.style.overflow = showModal ? "hidden" : "unset";
+  }, [showModal]);
+  const hadnleOnEscapeClose = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.code === "Escape") {
+        setShowModal(false);
+      }
+    },
+    [setShowModal]
+  );
 
   useEffect(() => {
     document.body.addEventListener("keydown", hadnleOnEscapeClose);
@@ -32,7 +38,7 @@ export const Modal = ({ children, showModal, setShowModal }: Props) => {
     return null;
   }
   return createPortal(
-    <ModalLayout onClick={() => setShowModal(false)}>
+    <ModalBackdrop onClick={() => setShowModal(false)}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={() => setShowModal(false)}>
           <IoCloseOutline size={"20px"} color="inherit" />
@@ -40,7 +46,7 @@ export const Modal = ({ children, showModal, setShowModal }: Props) => {
 
         {children}
       </ModalContent>
-    </ModalLayout>,
-    document.getElementById('root') as HTMLElement
+    </ModalBackdrop>,
+    document.getElementById("root") as HTMLElement
   );
 };

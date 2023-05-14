@@ -11,7 +11,7 @@ const MainTitle = ({ children }: Props) => {
     <>
       <H1>{children}</H1>
       <button onClick={() => setShowModal(true)}>modal</button>
-      <Modal setShowModal= {setShowModal} showModal = {showModal}>ddd</Modal>
+      <Modal setShowModal= {setShowModal} showModal = {showModal}>g</Modal>
     </>
   );
 };
