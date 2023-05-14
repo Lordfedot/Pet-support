@@ -31,7 +31,7 @@ export const SearchNoticesInput = styled(Input)`
   }
 `;
 
-export const CrossButton = styled.button`
+export const DeleteTextButton = styled.button`
   background-color: transparent;
   border: none;
   position: absolute;

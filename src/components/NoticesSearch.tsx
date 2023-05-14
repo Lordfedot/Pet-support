@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import {
   SearchNoticesInput,
   SearchNoticesWrapper,
-  CrossButton,
+  DeleteTextButton,
   AiOutlineSearchStyled,
   RxCrossCircledStyled,
 } from "../styles/components/SearchNotices.styled";
@@ -24,9 +24,9 @@ const NoticesSearch = () => {
         onChange={handleInputChange}
         placeholder="Search"
       ></SearchNoticesInput>
-      <CrossButton type="button" className="button" onClick={() => setValue('')}>
+      <DeleteTextButton type="button" className="button" onClick={() => setValue('')}>
         {isActive ?<RxCrossCircledStyled />  : <AiOutlineSearchStyled />}
-      </CrossButton>
+      </DeleteTextButton>
 
     </SearchNoticesWrapper>
   );
