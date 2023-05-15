@@ -5,4 +5,6 @@ export interface IService {
   time: string;
   address: string;
   phone: string;
+  url: string;
+  mapUrl: string;
 }

@@ -18,11 +18,15 @@ type Props = {
 
 const ServiceItem = ({ service }: Props) => {
   const [isShown, setIsShown] = useState(false);
-  const { name, _id, email, time, address, phone } = service;
+  const { name, _id, email, time, address, phone, url, mapUrl } = service;
+  const urlTarget = url === "#" ? "_self" : "_blank";
+  const mapTarget = mapUrl === "#" ? "_self" : "_blank";
   return (
     <ServicesItem key={_id}>
       <div>
-        <ServicesTitle href="">{name}</ServicesTitle>
+        <ServicesTitle target={urlTarget} href={url}>
+          {name}
+        </ServicesTitle>
         <ServicesWrapper>
           <img src="/public/images/image 42.png" alt="test" />
           <ServicesInfoList>
@@ -44,7 +48,9 @@ const ServiceItem = ({ service }: Props) => {
             </ServicesInfoItem>
             <ServicesInfoItem>
               <p>Address:</p>
-              <ServicesStyledLink href="">{address}</ServicesStyledLink>
+              <ServicesStyledLink target={mapTarget} href={mapUrl}>
+                {address}
+              </ServicesStyledLink>
             </ServicesInfoItem>
             <ServicesInfoItem>
               <p>Email:</p>
