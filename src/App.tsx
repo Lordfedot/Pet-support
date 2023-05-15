@@ -7,7 +7,7 @@ const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const NoticesPage = lazy(() => import("./pages/NoticesPage"));
 const OurFriensPage = lazy(() => import("./pages/OurFriensPage"));
-const NewsPage = lazy(() => import("./pages/NewPage"));
+const NewsPage = lazy(() => import("./pages/NewsPage"));
 const UserPage = lazy(() => import("./pages/UserPage"));
 
 const App = () => {
