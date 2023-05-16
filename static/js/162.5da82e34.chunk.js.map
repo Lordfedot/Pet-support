@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/162.5da82e34.chunk.js","mappings":"kIAQA,UAJiB,WACb,OAAOA,EAAAA,EAAAA,KAAAC,EAAAA,SAAA,CAAAC,SAAE,QACb,C","sources":["pages/UserPage.tsx"],"sourcesContent":["\r\n\r\n\r\n\r\nconst UserPage = () => {\r\n    return <>user</>\r\n}\r\n\r\nexport default UserPage"],"names":["_jsx","_Fragment","children"],"sourceRoot":""}

@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/30.0a9787e0.chunk.js","mappings":"gIAOA,UAJkB,WACd,OAAOA,EAAAA,EAAAA,KAAAC,EAAAA,SAAA,CAAAC,SAAE,SACb,C","sources":["pages/LoginPage.tsx"],"sourcesContent":["\r\n\r\n\r\nconst LoginPage = () => {\r\n    return <>login</>\r\n}\r\n\r\nexport default LoginPage"],"names":["_jsx","_Fragment","children"],"sourceRoot":""}
