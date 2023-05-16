@@ -1,5 +1,6 @@
 export interface IService {
   _id: string;
+  logo: string;
   name: string;
   email: string;
   time: string;

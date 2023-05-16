@@ -5,13 +5,14 @@ import { GiHamburgerMenu } from "react-icons/gi";
 export const TabletWrapper = styled.div`
   display: flex;
   gap: 25px;
-`
+`;
 export const BoxHeader = styled.header`
   display: flex;
   align-items: center;
   padding-top: 16px;
   justify-content: space-between;
- 
+  height: 10vh;
+
   @media ${device.tablet} {
     padding-top: 26px;
   }

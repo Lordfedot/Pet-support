@@ -7,7 +7,8 @@ import {
   ServicesWrapper,
   ServicesDropdown,
   ServicesStyledText,
-} from "../styles/components/OurFriensPage.styled";
+  ServiceImg
+} from "../styles/components/ServiceItem.styled";
 import { useState } from "react";
 import { days } from "../helpers/days";
 import { IService } from "../interfaces/IService";
@@ -18,7 +19,7 @@ type Props = {
 
 const ServiceItem = ({ service }: Props) => {
   const [isShown, setIsShown] = useState(false);
-  const { name, _id, email, time, address, phone, url, mapUrl } = service;
+  const { name, _id, email, time, address, phone, url, mapUrl, logo } = service;
   const urlTarget = url === "#" ? "_self" : "_blank";
   const mapTarget = mapUrl === "#" ? "_self" : "_blank";
   return (
@@ -28,7 +29,7 @@ const ServiceItem = ({ service }: Props) => {
           {name}
         </ServicesTitle>
         <ServicesWrapper>
-          <img src="/public/images/image 42.png" alt="test" />
+          <ServiceImg src={logo} alt="test" />
           <ServicesInfoList>
             <ServicesInfoItem>
               <p>Time:</p>
@@ -38,7 +39,7 @@ const ServiceItem = ({ service }: Props) => {
               {isShown && (
                 <ServicesDropdown>
                   {days.map((day) => (
-                    <li>
+                    <li key={day}>
                       <p>{day}</p>
                       <p>{time}</p>
                     </li>

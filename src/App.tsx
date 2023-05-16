@@ -9,12 +9,13 @@ const NoticesPage = lazy(() => import("./pages/NoticesPage"));
 const OurFriensPage = lazy(() => import("./pages/OurFriensPage"));
 const NewsPage = lazy(() => import("./pages/NewsPage"));
 const UserPage = lazy(() => import("./pages/UserPage"));
-
+const HomePage = lazy(() => import("./pages/HomePage"));
 const App = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
+          <Route path="/" element={<HomePage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/notices" element={<NoticesPage />}></Route>
@@ -23,7 +24,7 @@ const App = () => {
           <Route path="/user" element={<UserPage />}></Route>
         </Route>
       </Routes>
-      <GlobalStyles/>
+      <GlobalStyles />
     </>
   );
 };
