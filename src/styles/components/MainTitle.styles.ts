@@ -12,3 +12,7 @@ export const H1 = styled.h1`
     line-height: 66px;
   }
 `;
+
+export const TitleForm = styled(H1)`
+
+`

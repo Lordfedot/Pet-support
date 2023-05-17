@@ -13,3 +13,10 @@ export const Container = styled.div`
     padding-right: 16px;
   }
 `;
+
+export const ContainerForm = styled(Container)`
+  @media ${device.tablet} {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+`;

@@ -1,8 +1,15 @@
-
-
+import AuthForm from "../components/AuthForm";
+import { SectionForm } from "../styles/components/Section.styled";
+import { ContainerForm } from "../styles/components/Container.styled";
 
 const RegisterPage = () => {
-    return <p>register</p>
-}
+  return (
+    <SectionForm>
+      <ContainerForm>
+        <AuthForm></AuthForm>
+      </ContainerForm>
+    </SectionForm>
+  );
+};
 
-export default RegisterPage
+export default RegisterPage;

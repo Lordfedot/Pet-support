@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import device from "../../helpers/devices";
+import { Link } from "react-router-dom";
 
 export const AuthNavWrapper = styled.ul`
   margin-top: 46px;
@@ -12,7 +13,7 @@ export const AuthNavWrapper = styled.ul`
    margin: 0;
   }
 `;
-export const StyledLink = styled.li`
+export const StyledLink = styled(Link)`
   padding: 10px 28px;
   cursor: pointer;
 

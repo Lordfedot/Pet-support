@@ -11,3 +11,7 @@ export const Section = styled.section`
     padding-bottom: 200px;
   }
 `;
+
+export const SectionForm = styled(Section)`
+  
+`
