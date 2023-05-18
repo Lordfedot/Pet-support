@@ -15,6 +15,7 @@ export const Container = styled.div`
 `;
 
 export const ContainerForm = styled(Container)`
+  
   @media ${device.tablet} {
     padding-left: 80px;
     padding-right: 80px;

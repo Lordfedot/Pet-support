@@ -12,6 +12,8 @@ export const Section = styled.section`
   }
 `;
 
-export const SectionForm = styled(Section)`
-  
-`
+export const SectionForm = styled.div`
+  padding-top: 40px;
+  padding-bottom: 40px;
+  max-height: 90vh;
+`;

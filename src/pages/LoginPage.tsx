@@ -1,8 +1,14 @@
-
-
-
+import LoginForm from "../components/LoginForm";
+import { ContainerForm } from "../styles/components/Container.styled";
+import { SectionForm } from "../styles/components/Section.styled";
 const LoginPage = () => {
-    return <>login</>
-}
+  return (
+    <SectionForm>
+      <ContainerForm>
+        <LoginForm></LoginForm>
+      </ContainerForm>
+    </SectionForm>
+  );
+};
 
-export default LoginPage
+export default LoginPage;

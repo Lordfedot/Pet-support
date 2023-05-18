@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useFormik } from "formik";
 import RegisterValidationSchema from "../helpers/ValidateRegisterForm";
@@ -18,9 +18,15 @@ import {
   Form,
 } from "../styles/components/AuthForm.styled";
 import { TitleForm } from "../styles/components/MainTitle.styles";
+import { useAppDispatch, useAppSelector } from "../redux/selector";
+import { register } from "../redux/operation";
+import { reset } from "../redux/slice";
 
 const AuthForm = () => {
   const [page, setPage] = useState(1);
+  const dispath = useAppDispatch();
+  const { isLoading, isSuccess, } = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -33,9 +39,23 @@ const AuthForm = () => {
     },
     validationSchema: RegisterValidationSchema,
     onSubmit: (values, { setSubmitting, resetForm }) => {
+      const newUser = {
+        email: values.email,
+        password: values.password,
+        name: values.name,
+        city: values.city,
+        phone: values.phone,
+      };
       alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
-      resetForm();
+      if (isSuccess) {
+        dispath(reset);
+        // resetForm();
+        navigate("/login");
+      }
+      if (values.password === values.confirmPassword) {
+        dispath(register(newUser));
+      }
     },
   });
 
@@ -48,8 +68,7 @@ const AuthForm = () => {
     handleChange,
     handleBlur,
   } = formik;
-  console.log(errors);
-  console.log(touched);
+
   const setClass = (error: any, touched: any) => {
     if (error && touched) {
       return "invalid";
@@ -92,6 +111,7 @@ const AuthForm = () => {
           <FormList>
             <FormItem>
               <FormInput
+                type="email"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.email}
@@ -114,6 +134,7 @@ const AuthForm = () => {
             </FormItem>
             <FormItem>
               <FormInput
+                type="password"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 autoComplete="off"
@@ -137,6 +158,7 @@ const AuthForm = () => {
             </FormItem>
             <FormItem>
               <FormInput
+                type="password"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.confirmPassword}
@@ -182,6 +204,7 @@ const AuthForm = () => {
           <FormList>
             <FormItem>
               <FormInput
+                type="text"
                 onBlur={handleBlur}
                 value={values.name}
                 onChange={handleChange}
@@ -204,6 +227,7 @@ const AuthForm = () => {
             </FormItem>
             <FormItem>
               <FormInput
+                type="text"
                 onBlur={handleBlur}
                 value={values.city}
                 onChange={handleChange}
@@ -226,6 +250,7 @@ const AuthForm = () => {
             </FormItem>
             <FormItem>
               <FormInput
+                type="text"
                 onBlur={handleBlur}
                 value={values.phone}
                 onChange={handleChange}

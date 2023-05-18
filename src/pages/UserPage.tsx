@@ -1,9 +1,15 @@
-
-
-
+import { Container } from "../styles/components/Container.styled";
+import { Section } from "../styles/components/Section.styled";
+import UserData from "../components/UserData";
 
 const UserPage = () => {
-    return <>user</>
-}
+  return (
+    <Section>
+      <Container>
+        <UserData></UserData>
+      </Container>
+    </Section>
+  );
+};
 
-export default UserPage
+export default UserPage;
