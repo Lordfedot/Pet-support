@@ -1,7 +1,9 @@
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import SharedLayout from "./components/SharedLayout";
 import GlobalStyles from "./styles/global";
+import { useAppDispatch, useAppSelector } from "./redux/selector";
+import { fetchCurrentUser } from "./redux/operation";
 
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
@@ -11,6 +13,12 @@ const NewsPage = lazy(() => import("./pages/NewsPage"));
 const UserPage = lazy(() => import("./pages/UserPage"));
 const HomePage = lazy(() => import("./pages/HomePage"));
 const App = () => {
+  const dispatch = useAppDispatch();
+  const { isRefreshing } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
   return (
     <>
       <Routes>

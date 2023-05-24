@@ -1,13 +1,13 @@
-import { Container } from "../styles/components/Container.styled";
+import { UserPageContainer } from "../styles/components/Container.styled";
 import { Section } from "../styles/components/Section.styled";
 import UserData from "../components/UserData";
 
 const UserPage = () => {
   return (
     <Section>
-      <Container>
+      <UserPageContainer>
         <UserData></UserData>
-      </Container>
+      </UserPageContainer>
     </Section>
   );
 };

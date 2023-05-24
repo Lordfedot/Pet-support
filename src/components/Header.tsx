@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Logo from "./Logo";
 import Nav from "./Nav";
 import BurgerMenu from "./BurgerMenu";
@@ -17,8 +17,9 @@ import { useAppSelector } from "../redux/selector";
 const Header = () => {
   const [burgerShow, setBurgerShow] = useState(false);
   const { isAuthenticated } = useAppSelector((state) => state.auth);
-  
-
+  useEffect(() => {
+    document.body.style.overflow = burgerShow ? "hidden" : "unset";
+  }, [burgerShow]);
   return (
     <Container>
       <BoxHeader>
@@ -31,12 +32,12 @@ const Header = () => {
 
         <Tablet>
           <TabletWrapper>
-            <AuthNav />
+            {isAuthenticated ? <UserNav /> : <AuthNav />}
             <BurgerButton onClick={() => setBurgerShow(true)} type="button">
               <GiHamburgerMenuStyled />
             </BurgerButton>
             {burgerShow && (
-              <BurgerMenu burgerShow={burgerShow} setBurgerShow={setBurgerShow}>
+              <BurgerMenu setBurgerShow={setBurgerShow}>
                 <Nav />
               </BurgerMenu>
             )}
@@ -48,8 +49,8 @@ const Header = () => {
             <GiHamburgerMenuStyled />
           </BurgerButton>
           {burgerShow && (
-            <BurgerMenu burgerShow={burgerShow} setBurgerShow={setBurgerShow}>
-              <AuthNav />
+            <BurgerMenu setBurgerShow={setBurgerShow}>
+              {isAuthenticated ? <UserNav /> : <AuthNav />}
               <Nav />
             </BurgerMenu>
           )}

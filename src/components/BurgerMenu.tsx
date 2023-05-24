@@ -1,4 +1,4 @@
-import { ReactNode, Dispatch, SetStateAction, useEffect } from "react";
+import { ReactNode, Dispatch, SetStateAction } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import {
   BurgerWrapper,
@@ -10,14 +10,11 @@ import { createPortal } from "react-dom";
 
 type Props = {
   children: ReactNode;
-  burgerShow: boolean;
   setBurgerShow: Dispatch<SetStateAction<boolean>>;
 };
 
-const BurgerMenu = ({ burgerShow, children, setBurgerShow }: Props) => {
-  useEffect(() => {
-    document.body.style.overflow = burgerShow ? "hidden" : "unset";
-  }, [burgerShow]);
+const BurgerMenu = ({ children, setBurgerShow }: Props) => {
+
   return createPortal(
     <BurgerWrapper>
       <BurgerLayout>

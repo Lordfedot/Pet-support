@@ -3,19 +3,33 @@ import {
   UserDataInput,
   InputWrapper,
   UserDataText,
+  CheckButton,
+  PencilButton,
+  AiOutlineCheckStyled,
+  BsPencilStyled,
 } from "../styles/components/UserDataItem.styled";
-import { useState, ChangeEventHandler } from "react";
+import { useState, ChangeEventHandler, MouseEventHandler } from "react";
+
 type Props = {
   data?: string;
   text: string;
+  getEditing: Function;
+  editing: boolean;
 };
-const UserDataItem = ({ text, data }: Props) => {
+const UserDataItem = ({ text, data, editing, getEditing }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
-  console.log(data);
-  
+
   const [value, setValue] = useState(data);
   const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setValue(e.currentTarget.value);
+  };
+  const handleOnClickEdit: MouseEventHandler<HTMLButtonElement> = () => {
+    getEditing(true);
+    setIsEditing(!isEditing);
+  };
+  const handleOnClickClose: MouseEventHandler<HTMLButtonElement> = () => {
+    getEditing(false);
+    setIsEditing(!isEditing);
   };
   return (
     <DataItem>
@@ -24,19 +38,24 @@ const UserDataItem = ({ text, data }: Props) => {
         {isEditing ? (
           <>
             <UserDataInput
+              autoFocus
               onChange={handleOnChange}
               value={value}
             ></UserDataInput>
-            <button onClick={() => setIsEditing(false)} type="button">
-              close
-            </button>
+            <CheckButton onClick={handleOnClickClose} type="button">
+              <AiOutlineCheckStyled />
+            </CheckButton>
           </>
         ) : (
           <>
             <UserDataText>{value}</UserDataText>
-            <button onClick={() => setIsEditing(true)} type="button">
-              Edit
-            </button>
+            <PencilButton
+              disabled={editing}
+              onClick={handleOnClickEdit}
+              type="button"
+            >
+              <BsPencilStyled />
+            </PencilButton>
           </>
         )}
       </InputWrapper>
