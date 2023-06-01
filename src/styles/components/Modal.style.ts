@@ -17,7 +17,6 @@ export const ModalContent = styled.div`
   position: relative;
   border-radius: 40px;
   background-color: white;
-  padding: 40px 80px
 `;
 
 export const CloseButton = styled.button`
@@ -28,6 +27,7 @@ export const CloseButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 111;
 
   border-radius: 50%;
   border: none;
