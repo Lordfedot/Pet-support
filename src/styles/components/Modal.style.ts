@@ -32,6 +32,7 @@ export const CloseButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 111;
 
   border-radius: 50%;
   border: none;
