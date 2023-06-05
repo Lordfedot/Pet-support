@@ -14,6 +14,11 @@ export const UserDataWrapper = styled.div`
     flex-direction: row-reverse;
     border-radius: 0px 20px 20px 0px;
   }
+  @media ${device.desktop}{
+    display: block;
+    max-height: 560px;
+    width: 35%;
+  }
 `;
 export const ImgWrapper = styled.div`
   display: flex;
@@ -30,6 +35,7 @@ export const EditPhoto = styled.button`
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 
   align-self: flex-end;
 
@@ -56,4 +62,5 @@ export const UserDataList = styled.ul`
   @media ${device.tablet} {
     width: 100%;
   }
+  
 `;

@@ -18,7 +18,6 @@ type Props = {
 };
 const UserDataItem = ({ text, data, editing, getEditing }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
-
   const [value, setValue] = useState(data);
   const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setValue(e.currentTarget.value);

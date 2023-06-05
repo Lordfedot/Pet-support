@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import device from "../../helpers/devices";
 export const ModalBackdrop = styled.div`
   position: fixed;
   bottom: 0;
@@ -17,7 +17,11 @@ export const ModalContent = styled.div`
   position: relative;
   border-radius: 40px;
   background-color: white;
-  padding: 40px 80px
+
+  padding: 20px;
+  @media ${device.tablet} {
+    padding: 40px 80px;
+  }
 `;
 
 export const CloseButton = styled.button`

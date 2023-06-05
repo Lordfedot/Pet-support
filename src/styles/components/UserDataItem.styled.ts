@@ -58,6 +58,7 @@ export const CheckButton = styled.button<Prop>`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   padding: 5px;
   border-radius: 50%;
@@ -70,4 +71,5 @@ export const CheckButton = styled.button<Prop>`
     height: 32px;
   }
 `;
-export const PencilButton = styled(CheckButton)``;
+export const PencilButton = styled(CheckButton)`
+`;

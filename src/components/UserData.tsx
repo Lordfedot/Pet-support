@@ -1,6 +1,6 @@
 import { useState } from "react";
 import plug from "../images/photo.jpg";
-import { useAppSelector } from "../redux/selector";
+
 import {
   UserDataWrapper,
   DataImg,
@@ -11,15 +11,19 @@ import {
 } from "../styles/components/UserPage.styled";
 import UserDataItem from "./UserDataItem";
 import Logout from "./Logout";
+import { DisplayUser } from "../interfaces/IDisplayUser";
 
+type Props = {
+  user: DisplayUser | null;
+};
 
-const UserData = () => {
+const UserData = ({ user }: Props) => {
   const [editing, setEditing] = useState(false);
-  const { user } = useAppSelector((state) => state.auth);
-
+  
   const getEditing = (value: boolean) => {
     setEditing(value);
   };
+  if(!user) return <></>
   return (
     <UserDataWrapper>
       <ImgWrapper>
@@ -60,7 +64,7 @@ const UserData = () => {
           text={"City"}
         ></UserDataItem>
       </UserDataList>
-      <Logout/>
+      <Logout />
     </UserDataWrapper>
   );
 };

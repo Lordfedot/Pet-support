@@ -33,12 +33,13 @@ const LoginForm = () => {
     },
     validationSchema: LoginValidationSchema,
     onSubmit: (values: LoginUser, { setSubmitting, resetForm }) => {
+
       if (isSuccess) {
         dispath(reset);
-        dispath(login(values));
-        navigate("/");
         resetForm();
+        navigate("/");
       }
+      dispath(login(values));
       setSubmitting(false);
     },
   });

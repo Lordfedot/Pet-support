@@ -25,4 +25,8 @@ export const UserPageContainer = styled(Container)`
   @media ${device.tablet} {
     padding-left: 0;
   }
+  @media ${device.desktop}{
+    display: flex;
+    gap: 32px;
+  }
 `;
