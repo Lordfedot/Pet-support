@@ -1,8 +1,8 @@
 export interface INotice {
   _id: string;
   title: string;
-  petName: string;
   category: string;
+  petName: string;
   kind: string;
   breed: string;
   sex: string;
@@ -11,4 +11,8 @@ export interface INotice {
   owner: string;
   place: string;
   price?: string;
+  commentary: string;
+  ownerEmail: string;
+  ownerPhone: string;
+  isInFavourite: boolean;
 }

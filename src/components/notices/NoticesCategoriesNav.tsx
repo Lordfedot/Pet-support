@@ -8,7 +8,6 @@ import {
 import { Modal } from "../Modal";
 import NoticesCategoriesNavList from "./NoticesCategoriesNavList";
 import { Mobile, TablerOrDesctop } from "../../helpers/mediaQuery";
-import { NoticeModal } from "./NoticeModal";
 import { NoticesById } from "./NoticeById";
 import { Dispatch, SetStateAction } from "react";
 import { INotice } from "../../interfaces/INotice";
@@ -19,15 +18,10 @@ type NawListProps = {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   showModal: boolean;
   noticeById: INotice | undefined;
-  isNoticeModalOpen: {
-    isNoticeOpen: boolean;
-    noticeId: string
-  };
-  setNoticeModalState: Dispatch<
-    SetStateAction<{ isNoticeOpen: boolean; noticeId: string }>
-  >;
+  isNoticeModalOpen: boolean;
+  isAuthenticated: boolean;
+  setNoticeModalState: Dispatch<SetStateAction<boolean>>;
 };
-
 
 const NoticesCategoriesNav = ({
   buttonsStateHandler,
@@ -35,12 +29,13 @@ const NoticesCategoriesNav = ({
   showModal,
   noticeById,
   isNoticeModalOpen,
+  isAuthenticated,
   setNoticeModalState,
 }: NawListProps) => {
   return (
     <div>
       <NoticesNavWrapper>
-        <NoticesCategoriesNavList buttonsStateHandler={buttonsStateHandler} />
+        <NoticesCategoriesNavList buttonsStateHandler={buttonsStateHandler} isAuthenticated={isAuthenticated}/>
 
         <TablerOrDesctop>
           <AddPetWrapper>
@@ -60,12 +55,17 @@ const NoticesCategoriesNav = ({
         <Modal setShowModal={setShowModal} showModal={showModal}>
           g
         </Modal>
-        <NoticeModal
+        <Modal
           setShowModal={setNoticeModalState}
-          showModal={isNoticeModalOpen.isNoticeOpen}
+          showModal={isNoticeModalOpen}
         >
-          {noticeById && <NoticesById data={noticeById}></NoticesById>}
-        </NoticeModal>
+          {noticeById && (
+            <NoticesById
+              data={noticeById}
+              isAuthenticated={isAuthenticated}
+            ></NoticesById>
+          )}
+        </Modal>
       </NoticesNavWrapper>
     </div>
   );
