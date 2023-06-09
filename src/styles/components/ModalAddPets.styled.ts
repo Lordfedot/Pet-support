@@ -2,12 +2,18 @@ import styled from "styled-components";
 import { Input } from "./Input.styled";
 import { Button } from "./Button.styled";
 import { AiOutlinePlus } from "react-icons/ai";
+import device from "../../helpers/devices";
+
 export const AddPetModalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 280px;
   gap: 40px;
+
+  @media ${device.tablet} {
+    max-width: 608px
+  }
 `;
 
 export const AddPetModalTitle = styled.h2`
@@ -32,6 +38,9 @@ export const AddPetModalInput = styled(Input)`
   background-color: ${({ theme }) => theme.colors.bg};
   border: 1px solid rgba(245, 146, 86, 0.5);
 
+  @media ${device.tablet} {
+    width: 448px;
+  }
   padding: 11px 16px;
 `;
 
@@ -62,7 +71,7 @@ export const AddPetModalFileLabel = styled.label`
   height: 208px;
   background-color: ${({ theme }) => theme.colors.bg};
   border-radius: 20px;
-  
+
   align-self: center;
 
   position: relative;
@@ -90,4 +99,16 @@ export const AddPetModalFileTextArea = styled.textarea`
 
   padding: 11px 16px;
   min-height: 100px;
+
+  @media ${device.tablet} {
+    width: 448px;
+  }
+`;
+
+export const AddPetModalAvatar = styled.img`
+  align-self: center;
+
+  width: 208px;
+  height: 208px;
+  border-radius: 20px;
 `;
