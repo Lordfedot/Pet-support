@@ -1,3 +1,4 @@
+import { updateFavouriteList } from "../../helpers/fetchNotices";
 import { INotice } from "../../interfaces/INotice";
 import {
   AddFavouriteButton,
@@ -11,6 +12,7 @@ import {
   NoticesAvatar,
   NoticesItem,
 } from "../../styles/components/notices/NoticeList.styled";
+import { Icon } from "../svgIcon";
 
 type ListProps = {
   fetchedNotices: Array<INotice>;
@@ -18,12 +20,23 @@ type ListProps = {
     isNoticeOpen: boolean;
     noticeId: string;
   }) => void;
+  isAuthenticated: boolean;
 };
 
 export const NoticesList = ({
   fetchedNotices,
   noticeLearnMoreHandler,
+  isAuthenticated,
 }: ListProps) => {
+  const onAddToFavouriteClick = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    const response = await updateFavouriteList(e.currentTarget.id);
+    console.log(response.data);
+
+    window.alert(response.data.message);
+  };
+
   const onLoadMoreClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -38,8 +51,26 @@ export const NoticesList = ({
         return (
           <NoticesItem key={notice._id}>
             <NoticeCategory>{notice.category}</NoticeCategory>
-            <NoticesAvatar src={notice.avatar ? notice.avatar : ""} alt="" />
-            <AddFavouriteButton id={notice._id}>❤️</AddFavouriteButton>
+            <NoticesAvatar
+              src={notice.avatar ? notice.avatar : ""}
+              alt="avatar"
+            />
+            {isAuthenticated && (
+              <AddFavouriteButton
+                id={notice._id}
+                onClick={onAddToFavouriteClick}
+              >
+                <Icon
+                  iconId={
+                    notice.isInFavourite === true
+                      ? "iconFavourite"
+                      : "iconNotFavourite"
+                  }
+                  width={28}
+                  height={28}
+                ></Icon>
+              </AddFavouriteButton>
+            )}
             <NoticeDescriptionContainer>
               <NoticeTitle>{notice.title}</NoticeTitle>
               <NoticeDescriptionList>

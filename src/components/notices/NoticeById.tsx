@@ -1,3 +1,4 @@
+import { updateFavouriteList } from "../../helpers/fetchNotices";
 import { INotice } from "../../interfaces/INotice";
 import {
   NoticeByIdAvatar,
@@ -16,11 +17,22 @@ import {
   NoticeByIdContactButton,
   NoticeByIdAddToButton,
 } from "../../styles/components/notices/NoticeById.styled";
+import { Icon } from "../svgIcon";
 type NoticeProps = {
   data: INotice;
+  isAuthenticated: boolean;
 };
 
-export const NoticesById = ({ data }: NoticeProps) => {
+export const NoticesById = ({ data, isAuthenticated }: NoticeProps) => {
+  const onAddToFavouriteClick = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    const response = await updateFavouriteList(e.currentTarget.id);
+    console.log(response.data);
+
+    window.alert(response.data.message);
+  };
+
   console.log(data);
   return (
     <NoticeByIdContainer>
@@ -62,14 +74,14 @@ export const NoticesById = ({ data }: NoticeProps) => {
             </NoticeByIdDescriptionListItem>
             <NoticeByIdDescriptionListItem>
               <NoticeByIdFieldDescription>Email:</NoticeByIdFieldDescription>{" "}
-              <NoticeByIdContacts href="mailto: 1@gmai.com">
-                1@gmai.com
+              <NoticeByIdContacts href={data.ownerEmail ? data.ownerEmail : ""}>
+                {data.ownerEmail ? data.ownerEmail : ""}
               </NoticeByIdContacts>
             </NoticeByIdDescriptionListItem>
             <NoticeByIdDescriptionListItem>
               <NoticeByIdFieldDescription>Phone:</NoticeByIdFieldDescription>
-              <NoticeByIdContacts href="tel: +111-11-11">
-                111-11-11
+              <NoticeByIdContacts href={data.ownerPhone ? data.ownerPhone : ""}>
+                {data.ownerEmail ? data.ownerEmail : ""}
               </NoticeByIdContacts>
             </NoticeByIdDescriptionListItem>
             {data.price && (
@@ -86,15 +98,24 @@ export const NoticesById = ({ data }: NoticeProps) => {
       <NoticeByIdComents>
         Comments:
         <NoticeByIdComentsData>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          {data.commentary ? data.commentary : ""}
         </NoticeByIdComentsData>
       </NoticeByIdComents>
       <NoticeByIdButtonsList>
+        {isAuthenticated && (
+          <li>
+            <NoticeByIdAddToButton
+              id={data._id}
+              onClick={onAddToFavouriteClick}
+            > {data.isInFavourite === true ? "Add to" : "Remove from"}
+              <Icon iconId={"iconFavourite"} width={16} height={16}></Icon>
+            </NoticeByIdAddToButton>
+          </li>
+        )}
         <li>
-          <NoticeByIdAddToButton>Add to ❤️</NoticeByIdAddToButton>
-        </li>
-        <li>
-          <NoticeByIdContactButton href="tel: +111-11-11">Contact</NoticeByIdContactButton>
+          <NoticeByIdContactButton href="tel: +111-11-11">
+            Contact
+          </NoticeByIdContactButton>
         </li>
       </NoticeByIdButtonsList>
     </NoticeByIdContainer>

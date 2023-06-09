@@ -33,6 +33,11 @@ export const AddFavouriteButton = styled.button`
   border-radius: 50%;
   border: none;
   background-color: rgba(255, 255, 255, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 `;
 
 export const NoticeCategory = styled.p`
@@ -98,6 +103,8 @@ export const LearnMoreButton = styled.button`
   font-size: 16px;
   line-height: 1.38;
   color: #f59256;
+
+  cursor: pointer;
 
   :hover {
     background-color: #f59256;

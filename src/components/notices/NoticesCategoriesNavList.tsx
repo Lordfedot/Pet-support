@@ -8,6 +8,7 @@ type ButtonProps = {
 
 type ListProps = {
   buttonsStateHandler: (chandedButton: string, buttonState: boolean) => void;
+  isAuthenticated: boolean;
 };
 
 const CategoriesButton = ({ children, buttonsStateHandler }: ButtonProps) => {
@@ -15,26 +16,24 @@ const CategoriesButton = ({ children, buttonsStateHandler }: ButtonProps) => {
 
   const toggleCLass = isActive ? "active" : null;
 
-  const clickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-  {
-    setIsActive(!isActive)
+  const clickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setIsActive(!isActive);
     if (e.currentTarget.textContent !== null) {
       buttonsStateHandler(e.currentTarget.textContent, !isActive);
     }
-  }
+  };
 
   return (
-    <Button
-      onClick={clickHandler}
-      className={`${toggleCLass}`}
-      type="button"
-    >
+    <Button onClick={clickHandler} className={`${toggleCLass}`} type="button">
       {children}
     </Button>
   );
 };
 
-const NoticesCategoriesNavList = ({buttonsStateHandler }: ListProps) => {
+const NoticesCategoriesNavList = ({
+  buttonsStateHandler,
+  isAuthenticated,
+}: ListProps) => {
   return (
     <NoticesNavList>
       <li>
@@ -52,16 +51,20 @@ const NoticesCategoriesNavList = ({buttonsStateHandler }: ListProps) => {
           in good hands
         </CategoriesButton>
       </li>
-      <li>
-        <CategoriesButton buttonsStateHandler={buttonsStateHandler}>
-          my adds
-        </CategoriesButton>
-      </li>
-      <li>
-        <CategoriesButton buttonsStateHandler={buttonsStateHandler}>
-          favourite adds
-        </CategoriesButton>
-      </li>
+      {isAuthenticated && (
+        <>
+          <li>
+            <CategoriesButton buttonsStateHandler={buttonsStateHandler}>
+              my adds
+            </CategoriesButton>
+          </li>
+          <li>
+            <CategoriesButton buttonsStateHandler={buttonsStateHandler}>
+              favourite adds
+            </CategoriesButton>
+          </li>
+        </>
+      )}
     </NoticesNavList>
   );
 };
