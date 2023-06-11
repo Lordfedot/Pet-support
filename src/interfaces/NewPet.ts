@@ -3,5 +3,5 @@ export interface NewPet {
     comments: string;
     dateOfBirth: string;
     name: string;
-    photo: File | null
+    photo: File | undefined
   }

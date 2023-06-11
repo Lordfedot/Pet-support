@@ -32,7 +32,6 @@ export const AddPetForUser = async ({
         },
       }
     );
-    console.log(response);
     return response;
   } catch (error) {}
 };

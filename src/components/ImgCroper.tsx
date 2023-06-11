@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, ReactNode } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReactCrop, {
   centerCrop,
   makeAspectCrop,
@@ -13,18 +13,17 @@ import { Wrapper, CropperButton } from "../styles/components/ImgCropper.styled";
 type Props = {
   file: string | null;
   getNewFile: Function;
-  children: ReactNode
 };
 type ReturnFile = {
   previewUrl: string;
-    file: File;
-}
-export default function ImgCroper({ file, getNewFile, }: Props) {
+  file: File;
+};
+export default function ImgCroper({ file, getNewFile }: Props) {
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
-  const [newFile, setNewFile] = useState({} as ReturnFile | string)
+  const [newFile, setNewFile] = useState({} as ReturnFile | string);
 
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
     const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
@@ -46,7 +45,7 @@ export default function ImgCroper({ file, getNewFile, }: Props) {
     setCrop(crop);
   }
   const onSetImageClick = () => {
-    getNewFile(newFile)
+    getNewFile(newFile);
   };
   useEffect(() => {
     (async () => {
@@ -56,10 +55,10 @@ export default function ImgCroper({ file, getNewFile, }: Props) {
         imgRef.current &&
         previewCanvasRef.current
       ) {
-        // We use canvasPreview as it's much faster than imgPreview.
+  
         canvasPreview(imgRef.current, previewCanvasRef.current, completedCrop);
         const file = await imgPreview(imgRef.current, completedCrop);
-        setNewFile(file)
+        setNewFile(file);
       }
     })();
   }, [completedCrop]);
@@ -68,12 +67,17 @@ export default function ImgCroper({ file, getNewFile, }: Props) {
     <Wrapper>
       {!!file && (
         <ReactCrop
+          maxHeight={208}
+          maxWidth={208}
+          locked
           crop={crop}
           onChange={(_, percentCrop) => setCrop(percentCrop)}
           onComplete={(c) => setCompletedCrop(c)}
         >
           <img
             style={{
+              maxWidth: "400px",
+              maxHeight: "400px",
               width: "100%",
               height: "100%",
             }}

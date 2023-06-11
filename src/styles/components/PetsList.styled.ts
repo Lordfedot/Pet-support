@@ -31,6 +31,7 @@ export const PetImg = styled.img`
   margin-right: auto;
 
   @media ${device.tablet} {
+    margin: 0;
     max-width: 161px;
     height: 161px;
   }
@@ -42,6 +43,9 @@ export const PetsInfoList = styled.ul`
   gap: 12px;
 `;
 export const PetsInfoItem = styled.li`
+  p {
+    word-wrap: break-word;
+  }
   font-size: 14px;
   line-height: 22px;
   @media ${device.tablet} {

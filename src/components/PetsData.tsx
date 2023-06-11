@@ -9,7 +9,7 @@ import {
 import { Modal } from "./Modal";
 import { Pet } from "../interfaces/Pet";
 import PetsList from "./PetsList";
-import ModalAddPets from "./ModalsAddPets";
+import ModalAddPets from "./ModalAddPets/ModalsAddPets";
 type Props = {
   pets: Pet[];
 };
