@@ -2,14 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 import { DisplayUser } from "../interfaces/IDisplayUser";
 import { JWT } from "../interfaces/JWT";
-import { register, login } from "./operation";
+import { register, login, fetchCurrentUser, logout } from "./operation";
 
 interface AsyncState {
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
+  isRefreshing: boolean;
 }
-interface AuthState extends AsyncState {
+export interface AuthState extends AsyncState {
   user: DisplayUser | null;
   token: JWT;
   isAuthenticated: boolean;
@@ -22,6 +23,7 @@ const initialState: AuthState = {
   isLoading: false,
   isSuccess: false,
   isError: false,
+  isRefreshing: false,
 };
 
 export const authSlice = createSlice({
@@ -55,14 +57,30 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.token = action.payload.token;
-        state.isAuthenticated = true
+        state.isAuthenticated = true;
         state.user = action.payload.user;
       })
       .addCase(login.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
         state.user = null;
-        state.isAuthenticated = false
+        state.isAuthenticated = false;
+      })
+      .addCase(fetchCurrentUser.pending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.isAuthenticated = true;
+        state.isRefreshing = false;
+      })
+      .addCase(fetchCurrentUser.rejected, (state) => {
+        state.isRefreshing = false;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.token = null;
+        state.isAuthenticated = false;
+        state.user = null;
       });
   },
 });

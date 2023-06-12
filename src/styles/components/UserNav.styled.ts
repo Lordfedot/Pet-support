@@ -15,6 +15,7 @@ export const UserNavButton = styled(Link)`
   align-items: center;
   gap: 10px;
 
+  margin-bottom: 60px;
   padding: 10px 28px;
   cursor: pointer;
 
@@ -26,6 +27,9 @@ export const UserNavButton = styled(Link)`
   @media ${device.tablet} {
     font-size: 20px;
     line-height: 27px;
+  }
+  @media ${device.tablet} {
+    margin-bottom: 0;
   }
 
   border: 1px solid ${({ theme }) => theme.colors.primary};

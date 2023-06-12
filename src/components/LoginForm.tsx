@@ -26,7 +26,6 @@ const LoginForm = () => {
   const { isLoading, isSuccess } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
 
-  
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -34,14 +33,13 @@ const LoginForm = () => {
     },
     validationSchema: LoginValidationSchema,
     onSubmit: (values: LoginUser, { setSubmitting, resetForm }) => {
+      setSubmitting(false);
+      dispath(login(values));
       if (isSuccess) {
         dispath(reset);
-        // resetForm();
-        // navigate("/");
+        resetForm();
+        navigate("/");
       }
-
-      setSubmitting(false);
-      dispath(login(values))
     },
   });
 

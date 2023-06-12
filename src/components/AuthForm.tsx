@@ -25,7 +25,7 @@ import { reset } from "../redux/slice";
 const AuthForm = () => {
   const [page, setPage] = useState(1);
   const dispath = useAppDispatch();
-  const { isLoading, isSuccess, } = useAppSelector((state) => state.auth);
+  const { isSuccess } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -50,7 +50,7 @@ const AuthForm = () => {
       setSubmitting(false);
       if (isSuccess) {
         dispath(reset);
-        // resetForm();
+        resetForm();
         navigate("/login");
       }
       if (values.password === values.confirmPassword) {

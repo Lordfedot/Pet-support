@@ -1,5 +1,6 @@
+import { useState } from "react";
 import plug from "../images/photo.jpg";
-import { useAppSelector } from "../redux/selector";
+
 import {
   UserDataWrapper,
   DataImg,
@@ -9,8 +10,20 @@ import {
   UserDataList,
 } from "../styles/components/UserPage.styled";
 import UserDataItem from "./UserDataItem";
-const UserData = () => {
-  const { user } = useAppSelector((state) => state.auth);
+import Logout from "./Logout";
+import { DisplayUser } from "../interfaces/IDisplayUser";
+
+type Props = {
+  user: DisplayUser | null;
+};
+
+const UserData = ({ user }: Props) => {
+  const [editing, setEditing] = useState(false);
+  
+  const getEditing = (value: boolean) => {
+    setEditing(value);
+  };
+  if(!user) return <></>
   return (
     <UserDataWrapper>
       <ImgWrapper>
@@ -21,12 +34,37 @@ const UserData = () => {
         </EditPhoto>
       </ImgWrapper>
       <UserDataList>
-        <UserDataItem data={user?.name} text={"Name"}></UserDataItem>
-        <UserDataItem data={user?.email} text={"Email"}></UserDataItem>
-        <UserDataItem text={"Birthday"}></UserDataItem>
-        <UserDataItem data={user?.phone} text={"Phone"}></UserDataItem>
-        <UserDataItem data={user?.city} text={"City"}></UserDataItem>
+        <UserDataItem
+          editing={editing}
+          getEditing={getEditing}
+          data={user?.name}
+          text={"Name"}
+        ></UserDataItem>
+        <UserDataItem
+          editing={editing}
+          getEditing={getEditing}
+          data={user?.email}
+          text={"Email"}
+        ></UserDataItem>
+        <UserDataItem
+          editing={editing}
+          getEditing={getEditing}
+          text={"Birthday"}
+        ></UserDataItem>
+        <UserDataItem
+          editing={editing}
+          getEditing={getEditing}
+          data={user?.phone}
+          text={"Phone"}
+        ></UserDataItem>
+        <UserDataItem
+          editing={editing}
+          getEditing={getEditing}
+          data={user?.city}
+          text={"City"}
+        ></UserDataItem>
       </UserDataList>
+      <Logout />
     </UserDataWrapper>
   );
 };
