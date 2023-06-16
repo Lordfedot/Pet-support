@@ -15,11 +15,10 @@ const CustomInput = ({ name }: CustomInputProps) => {
   const [field, meta, helpers] = useField(name);
   const isError = checkOnError(meta.touched, meta.error)
   const error = toCapitilize(meta.error)
+  
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-
     const modifiedValue = toCapitilize(value);
-
     helpers.setValue(modifiedValue);
   };
 

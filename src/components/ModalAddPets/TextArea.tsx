@@ -14,9 +14,7 @@ const TextArea = ({ name }: CustomInputProps) => {
   
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
-
     const modifiedValue = toCapitilize(value);
-
     helpers.setValue(modifiedValue);
   };
 

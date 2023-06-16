@@ -10,9 +10,7 @@ export const AddPetForUser = async ({
   photo,
 }: NewPet) => {
   let formData = new FormData();
-  try {
-    console.log(photo);
-    
+  try { 
     if (photo) {
       formData.append("photo", photo);
     }
@@ -20,8 +18,6 @@ export const AddPetForUser = async ({
     formData.append("breed", breed);
     formData.append("comments", comments);
     formData.append("dateOfBirth", dateOfBirth);
-
-    console.log(formData);
 
     const response = await axios.post(
       "/api/pets",
@@ -33,5 +29,10 @@ export const AddPetForUser = async ({
       }
     );
     return response;
-  } catch (error) {}
+  } catch (error) {console.log(error);
+  }
 };
+
+
+
+
