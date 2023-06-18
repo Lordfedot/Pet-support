@@ -1,6 +1,6 @@
 import { UserPageContainer } from "../styles/components/Container.styled";
 import { Section } from "../styles/components/Section.styled";
-import UserData from "../components/UserData";
+import UserData from "../components/UserData/UserData";
 import PetsData from "../components/PetsData";
 import { useEffect, useState } from "react";
 import axios from "axios";

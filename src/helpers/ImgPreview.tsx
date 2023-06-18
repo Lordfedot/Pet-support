@@ -1,8 +1,6 @@
 import { PixelCrop } from "react-image-crop";
 import { canvasPreview } from "./CanvasPreview";
 
-let previewUrl = "";
-
 function toBlob(canvas: HTMLCanvasElement): Promise<Blob | null> {
   return new Promise((resolve) => {
     canvas.toBlob(resolve);
@@ -19,7 +17,7 @@ const blobToFile = (theBlob: Blob, fileName: string): File => {
   const file = new File([theBlob], "image.jpeg", {
     type: theBlob.type,
   });
-  
+
   return file;
 };
 
@@ -28,6 +26,7 @@ export async function imgPreview(
   crop: PixelCrop,
   scale = 1
 ) {
+  let previewUrl = "";
   const canvas = document.createElement("canvas");
   canvasPreview(image, canvas, crop, scale);
 
@@ -35,7 +34,7 @@ export async function imgPreview(
 
   if (!blob) {
     console.error("Failed to create blob");
-    return "";
+    return null
   }
 
   if (previewUrl) {
@@ -45,5 +44,5 @@ export async function imgPreview(
   previewUrl = URL.createObjectURL(blob);
   const file = blobToFile(blob, "name");
 
-  return { previewUrl, file };
+  return { previewUrl, file};
 }

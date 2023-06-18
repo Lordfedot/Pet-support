@@ -1,29 +1,38 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  SetStateAction,
+  Dispatch,
+} from "react";
 import ReactCrop, {
   centerCrop,
   makeAspectCrop,
   Crop,
   PixelCrop,
 } from "react-image-crop";
-import { canvasPreview } from "../helpers/CanvasPreview";
+import { canvasPreview } from "../../helpers/CanvasPreview";
 import "react-image-crop/dist/ReactCrop.css";
-import { imgPreview } from "../helpers/ImgPreview";
-import { Wrapper, CropperButton } from "../styles/components/ImgCropper.styled";
+import { imgPreview } from "../../helpers/ImgPreview";
+import {
+  Wrapper,
+  CropperButton,
+} from "../../styles/components/ImgCropper.styled";
+import { updateUser } from "../../helpers/Api";
 
 type Props = {
   file: string | null;
-  getNewFile: Function;
+  setSrc: Dispatch<SetStateAction<string>>;
 };
-type ReturnFile = {
-  previewUrl: string;
-  file: File;
-};
-export default function ImgCroper({ file, getNewFile }: Props) {
+
+export default function AvatarCroper({ file, setSrc }: Props) {
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
-  const [newFile, setNewFile] = useState({} as ReturnFile | null);
+  const [newFile, setNewFile] = useState(
+    {} as { previewUrl: string; file: File } | null
+  );
 
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
     const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
@@ -44,8 +53,14 @@ export default function ImgCroper({ file, getNewFile }: Props) {
 
     setCrop(crop);
   }
-  const onSetImageClick = () => {
-    getNewFile(newFile);
+  const onSetImageClick = async () => {
+    if (newFile) {
+      const { previewUrl, file } = newFile;
+      const result = await updateUser('avatar', file)
+      console.log(result);
+      
+      setSrc(previewUrl);
+    }
   };
   useEffect(() => {
     (async () => {
@@ -55,7 +70,6 @@ export default function ImgCroper({ file, getNewFile }: Props) {
         imgRef.current &&
         previewCanvasRef.current
       ) {
-  
         canvasPreview(imgRef.current, previewCanvasRef.current, completedCrop);
         const file = await imgPreview(imgRef.current, completedCrop);
         setNewFile(file);
@@ -70,14 +84,15 @@ export default function ImgCroper({ file, getNewFile }: Props) {
           maxHeight={208}
           maxWidth={208}
           locked
+          circularCrop
           crop={crop}
           onChange={(_, percentCrop) => setCrop(percentCrop)}
           onComplete={(c) => setCompletedCrop(c)}
         >
           <img
             style={{
-              maxWidth: "400px",
-              maxHeight: "400px",
+              maxWidth: "500px",
+              maxHeight: "350px",
               width: "100%",
               height: "100%",
             }}
@@ -94,11 +109,11 @@ export default function ImgCroper({ file, getNewFile }: Props) {
             <canvas
               ref={previewCanvasRef}
               style={{
-                borderRadius: "40px",
+                borderRadius: "50%",
                 border: "1px solid black",
                 objectFit: "cover",
-                width: "208px",
-                height: "208px",
+                width: "233px",
+                height: "233px",
               }}
             />
           </div>
