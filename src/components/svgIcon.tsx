@@ -1,4 +1,4 @@
-import iconSprite from '../img/iconSprite.svg'
+import iconSprite from '../images/iconSprite.svg'
 type IconProps = {
   iconId: string;
   width?: number;

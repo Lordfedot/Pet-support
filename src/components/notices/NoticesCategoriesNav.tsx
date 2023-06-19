@@ -11,6 +11,7 @@ import { Mobile, TablerOrDesctop } from "../../helpers/mediaQuery";
 import { NoticesById } from "./NoticeById";
 import { Dispatch, SetStateAction } from "react";
 import { INotice } from "../../interfaces/INotice";
+import { NoticesAddForm } from "./NoticeAddForm";
 
 
 type NawListProps = {
@@ -53,7 +54,7 @@ const NoticesCategoriesNav = ({
           </AddPetButton>
         </Mobile>
         <Modal setShowModal={setShowModal} showModal={showModal}>
-          g
+          <NoticesAddForm setShowModal={setShowModal}></NoticesAddForm>
         </Modal>
         <Modal
           setShowModal={setNoticeModalState}

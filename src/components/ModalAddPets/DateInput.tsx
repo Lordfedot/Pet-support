@@ -32,7 +32,7 @@ const DateInput = ({ name }: CustomInputProps) => {
   return (
     <>
       <AddPetModalLabel>
-        {toCapitilize(name)}
+        Date of birth:
         <AddPetModalInput
           {...field}
           isError={isError}

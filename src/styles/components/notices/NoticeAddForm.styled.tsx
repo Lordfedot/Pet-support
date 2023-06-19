@@ -1,0 +1,113 @@
+
+import { Field } from "formik";
+import styled from "styled-components";
+import device from "../../../helpers/devices";
+
+
+export const AddNoticeTitle = styled.p`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 1.36;
+  text-align: center;
+  width: 448px;
+  padding-bottom: 20px;
+`;
+
+export const AddNoticeIntro = styled.p`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.35;
+  text-align: center;
+  letter-spacing: -0.01em;
+  text-align: center;
+  width: 448px;
+  padding-bottom: 28px;
+`;
+
+export const FieldsList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-bottom: 40px;
+`;
+
+export const VisualyHiddenRadio = styled.input`
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
+`;
+
+export const CategoryLabel = styled.label`
+  border-radius: 40px;
+  border: 1px solid #f59256;
+  padding: 10px 28px;
+`;
+
+export const CategoryLabelActive = styled.label`
+  border-radius: 40px;
+  border: transparent;
+  background-color: #f59256;
+  padding: 10px 28px;
+`;
+
+export const CategoryRadioList = styled(Field)`
+  display: flex;
+  gap: 12px;
+`;
+
+export const SexRadioList = styled(Field)`
+  display: flex;
+  gap: 80px;
+`;
+
+export const SexLable = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const SexTextContentActive = styled.span`
+  color: #f59256;
+`;
+
+export const AddNoticeInput = styled(Field)`
+  background-color: ${({ theme }) => theme.colors.bg};
+  border: 1px solid rgba(245, 146, 86, 0.5);
+  border-radius: 40px;
+
+  @media ${device.tablet} {
+    width: 448px;
+  }
+  padding: 11px 16px;
+`;
+
+export const AddNoticeArea = styled(Field)`
+  height: 190px;
+  resize: none;
+  background-color: ${({ theme }) => theme.colors.bg};
+  border: 1px solid rgba(245, 146, 86, 0.5);
+  border-radius: 40px;
+
+  @media ${device.tablet} {
+    width: 448px;
+  }
+  padding: 16px;
+`;
+
+
+export const AddNoticeButtonList = styled.ul`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+`
