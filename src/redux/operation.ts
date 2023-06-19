@@ -64,13 +64,11 @@ export const login = createAsyncThunk(
   async (user: LoginUser, thunkAPI) => {
     try {
       const { data } = await axios.post("/login", user);
-      console.log(data);
-      console.log('lol');
-      
-      
       if (data) {
         axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+        console.log(axios.defaults.headers.common.Authorization)
       }
+      
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue("Unable to register");
