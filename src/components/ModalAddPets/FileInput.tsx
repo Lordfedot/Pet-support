@@ -18,6 +18,7 @@ const FileInput = ({ name }: CustomInputProps) => {
   const [field, meta, helpers] = useField(name);
   const [file, setFile] = useState<string | null>(null);
   const [src, setSrc] = useState<string | null>(null);
+  
   const isError = checkOnError(meta.touched, meta.error)
   const error = toCapitilize(meta.error)
   

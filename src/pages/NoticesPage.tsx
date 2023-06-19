@@ -30,7 +30,6 @@ const NoticesPage = () => {
   const [isNoticeModalOpen, setNoticeModalState] = useState(false);
   const [fullNoticeId, setFullNoticeId] = useState("");
   const [noticeById, setNoticeById] = useState<INotice>();
-
   const querryHandler = (data: string) => {
     setSearchQuery(data);
   };

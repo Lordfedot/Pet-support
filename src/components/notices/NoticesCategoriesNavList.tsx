@@ -34,6 +34,7 @@ const NoticesCategoriesNavList = ({
   buttonsStateHandler,
   isAuthenticated,
 }: ListProps) => {
+  const [isActive, setActive] = useState({})
   return (
     <NoticesNavList>
       <li>

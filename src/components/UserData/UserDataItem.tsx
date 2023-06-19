@@ -7,28 +7,33 @@ import {
   PencilButton,
   AiOutlineCheckStyled,
   BsPencilStyled,
-} from "../styles/components/UserDataItem.styled";
-import { useState, ChangeEventHandler, MouseEventHandler } from "react";
-
+} from "../../styles/components/UserDataItem.styled";
+import { useState, MouseEventHandler, SetStateAction, Dispatch } from "react";
+import { updateUser } from "../../helpers/Api";
+import { toCapitilize } from "../../helpers/ToCapitilized";
 type Props = {
   data?: string;
-  text: string;
-  getEditing: Function;
+  fieldName: string;
+  getEditing: Dispatch<SetStateAction<boolean>>;
   editing: boolean;
 };
-const UserDataItem = ({ text, data, editing, getEditing }: Props) => {
+const UserDataItem = ({ fieldName, data = "", editing, getEditing }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(data);
-  const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValue(e.currentTarget.value);
-  };
+  const text = toCapitilize(fieldName);
+  
   const handleOnClickEdit: MouseEventHandler<HTMLButtonElement> = () => {
     getEditing(true);
     setIsEditing(!isEditing);
   };
-  const handleOnClickClose: MouseEventHandler<HTMLButtonElement> = () => {
+
+  const handleOnClickClose: MouseEventHandler<HTMLButtonElement> = async () => {
     getEditing(false);
     setIsEditing(!isEditing);
+    if (value === data) {
+      return
+    }
+    await updateUser(fieldName, value);
   };
   return (
     <DataItem>
@@ -37,8 +42,9 @@ const UserDataItem = ({ text, data, editing, getEditing }: Props) => {
         {isEditing ? (
           <>
             <UserDataInput
+              name={`${fieldName}`}
               autoFocus
-              onChange={handleOnChange}
+              onChange={(e) => setValue(e.currentTarget.value)}
               value={value}
             ></UserDataInput>
             <CheckButton onClick={handleOnClickClose} type="button">
