@@ -1,8 +1,16 @@
 import axios from "axios";
 import { NewPet } from "../interfaces/NewPet";
 axios.defaults.baseURL = "https://pet-support-6z4x.onrender.com";
-export const updateUser = async (fieldName: string, body: string | File) => {
 
+export const deletePet = async (id: string) => {
+  try {
+    const response = await axios.delete(`/api/pets/${id}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const updateUser = async (fieldName: string, body: string | File) => {
   let formData = new FormData();
   if (body) {
     formData.append(`${fieldName}`, body);

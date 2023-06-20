@@ -38,7 +38,7 @@ export const NavigationItem = styled.li`
     font-size: 20px;
     line-height: 27px;
   }
-
+  transition: all 0.2s ease;
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }

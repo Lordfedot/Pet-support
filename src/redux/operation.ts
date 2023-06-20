@@ -66,7 +66,6 @@ export const login = createAsyncThunk(
       const { data } = await axios.post("/login", user);
       if (data) {
         axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
-        console.log(axios.defaults.headers.common.Authorization)
       }
       
       return data;

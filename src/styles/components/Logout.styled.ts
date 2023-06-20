@@ -16,10 +16,10 @@ export const LogoutButton = styled.button`
   margin-left: auto;
   border: none;
   background-color: transparent;
-
-  &:hover{
+  transition: all 0.3s ease;
+  &:hover {
     border-radius: 20px;
-    outline: 1px solid ${({theme}) => theme.colors.primary};
+    outline: 1px solid ${({ theme }) => theme.colors.primary};
   }
   @media ${device.tablet} {
     position: absolute;

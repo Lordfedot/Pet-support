@@ -7,7 +7,11 @@ export const ServicesItem = styled.li`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 12px;
   filter: drop-shadow(7px 4px 14px rgba(49, 21, 4, 0.07));
-
+  cursor: pointer;
+  transition: all 0.5s ease;
+  &:hover {
+    transform: scale(1.1);
+  }
   @media ${device.tablet} {
     width: 336px;
     padding: 16px;
@@ -25,7 +29,10 @@ export const ServicesTitle = styled.a`
   line-height: 16px;
   text-decoration-line: underline;
   color: ${({ theme }) => theme.colors.primary};
-
+  transition: all 0.5s ease;
+  &:hover {
+    color: ${({ theme }) => theme.colors.secondary};
+  }
   @media ${device.tablet} {
     margin-bottom: 16px;
     font-size: 16px;
@@ -74,6 +81,7 @@ export const ServicesInfoItem = styled.li`
 `;
 
 export const ServicesStyledText = styled.p`
+  transition: all 0.3s ease;
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }
@@ -86,7 +94,10 @@ export const ServicesStyledLink = styled.a`
   font-size: 12px;
   line-height: 16px;
   color: inherit;
-
+  transition: all 0.3s ease;
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
   @media ${device.tablet} {
     font-size: 14px;
     line-height: 19px;

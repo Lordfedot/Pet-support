@@ -1,5 +1,5 @@
 
-import { NavigationList,NavigationItem,StyledNavLink } from "../styles/components/Nav.styled";
+import { NavigationList,NavigationItem,StyledNavLink } from "../../styles/components/Nav.styled";
 
 const Nav = () => {
   return (

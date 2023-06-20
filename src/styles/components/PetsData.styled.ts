@@ -3,15 +3,14 @@ import device from "../../helpers/devices";
 import { AiOutlinePlus } from "react-icons/ai";
 
 export const PetsWrapper = styled.div`
-@media ${device.tablet}{
-  padding-left: 32px;
-}
-@media ${device.desktop}{
-  padding: 0;
-  width: 65%;
-}
- 
-`
+  @media ${device.tablet} {
+    padding-left: 32px;
+  }
+  @media ${device.desktop} {
+    padding: 0;
+    width: 65%;
+  }
+`;
 export const PetsDataWrapper = styled.div`
   margin-top: 26px;
   margin-bottom: 26px;
@@ -38,11 +37,11 @@ export const AddPetButton = styled.button`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.primary};
-
+  transition: all 0.3s ease;
   &:hover,
-  &focus {
+  &:focus {
+    transform: scale(1.1);
     background-color: ${({ theme }) => theme.colors.secondary};
-    border: 1px solid ${({ theme }) => theme.colors.text};
   }
 `;
 

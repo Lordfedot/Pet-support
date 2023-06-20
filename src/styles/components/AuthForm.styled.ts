@@ -3,8 +3,22 @@ import device from "../../helpers/devices";
 import { Button } from "./Button.styled";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { RxCrossCircled } from "react-icons/rx";
+import { Form } from "formik";
+type Props = {
+  isError: boolean;
+  isValid: boolean;
+};
 
-export const Form = styled.form`
+const getBorderColor = (isError: boolean, isValid: boolean) => {
+  if (isValid) {
+    return "red";
+  } else if (isError) {
+    return "green";
+  } else {
+    return "rgba(245, 146, 86, 0.5)";
+  }
+};
+export const FormStyled = styled(Form)`
   max-width: 420px;
   margin-left: auto;
   margin-right: auto;
@@ -46,20 +60,15 @@ export const FormItem = styled.li`
   position: relative;
 `;
 
-export const FormInput = styled.input`
+export const FormInput = styled.input<Props>`
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   border-radius: ${({ theme }) => theme.radius};
   padding: 9px 12px;
 
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
+  border: 1px solid
+    ${({ isValid, isError }) => getBorderColor(isValid, isError)};
   width: 100%;
-  &.invalid {
-    border: 1px solid red;
-  }
-  &.valid {
-    border: 1px solid green;
-  }
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.primary};
   }

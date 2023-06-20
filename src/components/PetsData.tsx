@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   AddPetButton,
   StyledAiOutlinePlus,
@@ -12,9 +12,10 @@ import PetsList from "./PetsList";
 import ModalAddPets from "./ModalAddPets/ModalsAddPets";
 type Props = {
   pets: Pet[];
+  setPets: Dispatch<SetStateAction<Pet[]>>
 };
 
-const PetsData = ({ pets }: Props) => {
+const PetsData = ({ pets, setPets }: Props) => {
   const [showModal, setShowModal] = useState(false);
 
   if (!pets) return <></>;
@@ -29,7 +30,7 @@ const PetsData = ({ pets }: Props) => {
           </AddPetButton>
         </AddPetButtonWrapper>
       </PetsDataWrapper>
-      <PetsList pets={pets} />
+      <PetsList setPets={setPets} pets={pets} />
       <Modal setShowModal={setShowModal} showModal={showModal}>
         <ModalAddPets setShowModal={setShowModal}/>
       </Modal>

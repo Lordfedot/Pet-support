@@ -3,7 +3,7 @@ import {
   StyledLink,
   StyledRegistrationLink,
   AuthNavWrapper,
-} from "../styles/components/AuthNav.styled";
+} from "../../styles/components/AuthNav.styled";
 const AuthNav = () => {
   return (
     <AuthNavWrapper>
