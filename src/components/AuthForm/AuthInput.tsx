@@ -18,7 +18,8 @@ const AuthInput = ({ name }: CustomInputProps) => {
   const isError = checkOnError(meta.touched, meta.error);
   const isValid = checkOnValid(meta.touched, meta.error);
   const error = toCapitilize(meta.error);
-  const capitalName = name === 'confirmPassword'? "Confirm password" : toCapitilize(name)
+  const capitalName =
+    name === "confirmPassword" ? "Confirm password" : toCapitilize(name);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const modifiedValue = toCapitilize(value);
@@ -34,20 +35,17 @@ const AuthInput = ({ name }: CustomInputProps) => {
         isError={isError}
         isValid={isValid}
       ></FormInput>
-      {isError && (
-        <>
-          <RxCrossCircledStyled />
-          <ErrorMessage>{error}</ErrorMessage>
-        </>
-      )}
-      {isValid && (
-        <>
-          <ValidMessage>Valid {capitalName}</ValidMessage>
-          <AiFillCheckCircleStyled />
-        </>
-      )}
+      <>
+        <RxCrossCircledStyled style={{ opacity: isError ? 1 : 0 }} />
+        <ErrorMessage isError={isError}>{error}</ErrorMessage>
+      </>
+
+      <>
+        <ValidMessage isValid={isValid}>Valid {capitalName}</ValidMessage>
+        <AiFillCheckCircleStyled style={{ opacity: isValid ? 1 : 0 }} />
+      </>
     </>
   );
 };
 
-export default AuthInput
+export default AuthInput;

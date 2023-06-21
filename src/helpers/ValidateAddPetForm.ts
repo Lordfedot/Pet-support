@@ -1,8 +1,16 @@
 import * as yup from "yup";
 
 const AddPetValidationSchema = yup.object().shape({
-  breed: yup.string().required().min(2).max(16),
-  comments: yup.string().required().min(8).max(120),
+  breed: yup
+    .string()
+    .required("Breed required")
+    .min(2, "Breed must be at least 2 characters")
+    .max(16, "Breed cannot exceed 16 characters"),
+  comments: yup
+    .string()
+    .required("Comments required")
+    .min(8, "Comments must be at least 8 characters")
+    .max(120, "Comments cannot exceed 120 characters"),
   dateOfBirth: yup
     .string()
     .matches(
@@ -10,8 +18,12 @@ const AddPetValidationSchema = yup.object().shape({
       "Invalid date format"
     )
     .required("Date is required"),
-  name: yup.string().required().min(2).max(16),
-  photo: yup.mixed().required(),
+  name: yup
+    .string()
+    .required("Name required")
+    .min(2, "Name must be at least 2 characters")
+    .max(16, "Name cannot exceed 16 characters"),
+  photo: yup.mixed().required("Photo required"),
 });
 
 export default AddPetValidationSchema;

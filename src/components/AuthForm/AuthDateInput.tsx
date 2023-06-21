@@ -47,18 +47,15 @@ const AuthDateInput = ({ name }: CustomInputProps) => {
         isError={isError}
         isValid={isValid}
       ></FormInput>
-      {isError && (
-        <>
-          <RxCrossCircledStyled />
-          <ErrorMessage>{error}</ErrorMessage>
-        </>
-      )}
-      {isValid && (
-        <>
-          <ValidMessage>Valid {name}</ValidMessage>
-          <AiFillCheckCircleStyled />
-        </>
-      )}
+      <>
+        <RxCrossCircledStyled style={{ opacity: isError ? 1 : 0 }} />
+        <ErrorMessage isError={isError}>{error}</ErrorMessage>
+      </>
+
+      <>
+        <ValidMessage isValid={isValid}>Valid {name}</ValidMessage>
+        <AiFillCheckCircleStyled style={{ opacity: isValid ? 1 : 0 }} />
+      </>
     </>
   );
 };

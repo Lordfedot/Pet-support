@@ -1,7 +1,7 @@
 import { UserPageContainer } from "../styles/components/Container.styled";
 import { Section } from "../styles/components/Section.styled";
 import UserData from "../components/UserData/UserData";
-import PetsData from "../components/PetsData";
+import PetsData from "../components/PetsData/PetsData";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DisplayUser } from "../interfaces/IDisplayUser";

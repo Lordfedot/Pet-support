@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import { deletePet } from "../helpers/Api";
-import { Pet } from "../interfaces/Pet";
+import { deletePet } from "../../helpers/Api";
+import { Pet } from "../../interfaces/Pet";
 import {
   PetsListStyled,
   PetsItem,
@@ -9,7 +9,7 @@ import {
   PetsInfoItem,
   MdDeleteStyled,
   DeleteButton,
-} from "../styles/components/PetsList.styled";
+} from "../../styles/components/PetsList.styled";
 type Props = {
   pets: Pet[];
   setPets: Dispatch<SetStateAction<Pet[]>>;

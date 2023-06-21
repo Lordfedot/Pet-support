@@ -1,7 +1,15 @@
 import axios from "axios";
 import { NewPet } from "../interfaces/NewPet";
 axios.defaults.baseURL = "https://pet-support-6z4x.onrender.com";
-
+export const getNews = async() => {
+  try {
+    const response = await axios('/news')
+    return response
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
 export const deletePet = async (id: string) => {
   try {
     const response = await axios.delete(`/api/pets/${id}`);
