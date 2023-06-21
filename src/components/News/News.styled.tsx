@@ -23,7 +23,7 @@ export const NewsInput = styled.input`
   width: 100%;
   padding: 9px 12px;
   transition: all 0.3s ease;
-  &:focus{
+  &:focus {
     border: 1px solid ${({ theme }) => theme.colors.secondary};
   }
 `;
@@ -51,9 +51,16 @@ export const NewsLi = styled.li`
 `;
 export const NewsImg = styled.img`
   border-radius: 20px;
-
-  width: 336px;
+  width: 280px;
   height: 252px;
+
+  margin-left: auto;
+  margin-right: auto;
+  @media ${device.tablet} {
+    width: 336px;
+    margin-left: none;
+    margin-right: none;
+  }
 `;
 export const NewsTitle = styled.h2`
   font-weight: 700;

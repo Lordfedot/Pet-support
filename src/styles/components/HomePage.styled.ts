@@ -54,11 +54,12 @@ export const DogBG = styled.div`
 
   @media ${device.tablet} {
     max-height: 1193px;
-    background-position: 50% 30vh;
+    background-position: 90% 30vh;
   }
   @media ${device.desktop} {
     background-size: contain;
     background-position: right;
     max-height: 768px;
+    background-position: 70% 30vh;
   }
 `;

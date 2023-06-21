@@ -37,11 +37,9 @@ const Header = () => {
             <BurgerButton onClick={() => setBurgerShow(true)} type="button">
               <GiHamburgerMenuStyled />
             </BurgerButton>
-            {burgerShow && (
-              <BurgerMenu setBurgerShow={setBurgerShow}>
-                <Nav />
-              </BurgerMenu>
-            )}
+            <BurgerMenu burgerShow={burgerShow} setBurgerShow={setBurgerShow}>
+              <Nav />
+            </BurgerMenu>
           </TabletWrapper>
         </Tablet>
 
@@ -49,12 +47,11 @@ const Header = () => {
           <BurgerButton onClick={() => setBurgerShow(true)} type="button">
             <GiHamburgerMenuStyled />
           </BurgerButton>
-          {burgerShow && (
-            <BurgerMenu setBurgerShow={setBurgerShow}>
-              {isAuthenticated ? <UserNav /> : <AuthNav />}
-              <Nav />
-            </BurgerMenu>
-          )}
+
+          <BurgerMenu burgerShow={burgerShow} setBurgerShow={setBurgerShow}>
+            {isAuthenticated ? <UserNav /> : <AuthNav />}
+            <Nav />
+          </BurgerMenu>
         </Mobile>
       </BoxHeader>
     </Container>
