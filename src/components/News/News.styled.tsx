@@ -22,24 +22,27 @@ export const NewsInput = styled.input`
 
   width: 100%;
   padding: 9px 12px;
+  transition: all 0.3s ease;
+  &:focus{
+    border: 1px solid ${({ theme }) => theme.colors.secondary};
+  }
 `;
 
 export const NewsLi = styled.li`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  
+
   ::before {
     content: "";
     transition: all 0.4s ease;
     width: 100%;
     height: 6px;
-   
-   
+
     background: linear-gradient(90deg, #ff634e 0%, #ffdf48 105.44%);
     border-radius: 40px;
   }
-  &:hover::before{
+  &:hover::before {
     background: linear-gradient(240deg, #ff634e 0%, #ffdf48 105.44%);
   }
   @media ${device.tablet} {
@@ -96,6 +99,7 @@ export const DeleteTextButton = styled.button`
 
   width: 15px;
   height: 15px;
+  transition: all 0.3s ease;
   :hover {
     color: ${({ theme }) => theme.colors.primary};
   }
@@ -105,6 +109,7 @@ export const DeleteTextButton = styled.button`
   }
 `;
 export const AiOutlineSearchStyled = styled(AiOutlineSearch)`
+  transition: all 0.3s ease;
   color: inherit;
   width: 100%;
   height: 100%;
@@ -113,6 +118,7 @@ export const AiOutlineSearchStyled = styled(AiOutlineSearch)`
   right: 0;
 `;
 export const RxCrossCircledStyled = styled(RxCrossCircled)`
+  transition: all 0.1s ease;
   pointer-events: none;
   color: inherit;
   width: 100%;
