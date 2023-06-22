@@ -5,7 +5,7 @@ export interface NewNotice {
   breed: string;
   sex: string;
   dateOfBirth: string;
-  avatar?: File | undefined;
+  avatar?: File | undefined | null;
   place: string;
   price: string;
   commentary: string;

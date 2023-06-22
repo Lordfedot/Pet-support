@@ -24,13 +24,17 @@ type NoticeProps = {
 };
 
 export const NoticesById = ({ data, isAuthenticated }: NoticeProps) => {
+  const telRef: string = `tel: ${data.ownerPhone}`
+  const mailRef: string = `mailto: ${data.ownerEmail}`
+  
   const onAddToFavouriteClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  ) => { 
     const response = await updateFavouriteList(e.currentTarget.id);
+    data.isInFavourite = !data.isInFavourite;
     console.log(response.data);
 
-    window.alert(response.data.message);
+    await window.alert(response.data.message);
   };
 
   console.log(data);
@@ -74,14 +78,14 @@ export const NoticesById = ({ data, isAuthenticated }: NoticeProps) => {
             </NoticeByIdDescriptionListItem>
             <NoticeByIdDescriptionListItem>
               <NoticeByIdFieldDescription>Email:</NoticeByIdFieldDescription>{" "}
-              <NoticeByIdContacts href={data.ownerEmail ? data.ownerEmail : ""}>
+              <NoticeByIdContacts href={data.ownerEmail ? mailRef : ""}>
                 {data.ownerEmail ? data.ownerEmail : ""}
               </NoticeByIdContacts>
             </NoticeByIdDescriptionListItem>
             <NoticeByIdDescriptionListItem>
               <NoticeByIdFieldDescription>Phone:</NoticeByIdFieldDescription>
-              <NoticeByIdContacts href={data.ownerPhone ? data.ownerPhone : ""}>
-                {data.ownerEmail ? data.ownerEmail : ""}
+              <NoticeByIdContacts href={data.ownerPhone ? telRef : ""}>
+                {data.ownerPhone ? data.ownerPhone : ""}
               </NoticeByIdContacts>
             </NoticeByIdDescriptionListItem>
             {data.price && (
@@ -107,7 +111,8 @@ export const NoticesById = ({ data, isAuthenticated }: NoticeProps) => {
             <NoticeByIdAddToButton
               id={data._id}
               onClick={onAddToFavouriteClick}
-            > {data.isInFavourite === true ? "Add to" : "Remove from"}
+            >
+              {data.isInFavourite === true ? "Remove from" : "Add to"}
               <Icon iconId={"iconFavourite"} width={16} height={16}></Icon>
             </NoticeByIdAddToButton>
           </li>

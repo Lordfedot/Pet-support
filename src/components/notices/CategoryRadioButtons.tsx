@@ -1,3 +1,4 @@
+import { useField } from "formik";
 import {
   CategoryLabel,
   CategoryLabelActive,
@@ -6,9 +7,14 @@ import {
 } from "../../styles/components/notices/NoticeAddForm.styled";
 import { useState, ChangeEvent } from "react";
 
-export const CategoryRadioButtons = () => {
+interface radiobuttonProps {
+  name: string
+}
+
+export const CategoryRadioButtons = ({name}: radiobuttonProps) => {
+  const [field, meta, helpers] = useField(name);
   const [isActive, setIsActive] = useState({
-    sell: true,
+    sell: false,
     lostFound: false,
     inGoodHands: false,
   });
@@ -16,30 +22,32 @@ export const CategoryRadioButtons = () => {
     switch (e.currentTarget.value) {
       case "sell":
         setIsActive({ sell: true, lostFound: false, inGoodHands: false });
+        helpers.setValue('sell')
         break;
       case "lost/found":
         setIsActive({ sell: false, lostFound: true, inGoodHands: false });
+        helpers.setValue("lost/found");
         break;
       case "in good hands":
         setIsActive({ sell: false, lostFound: false, inGoodHands: true });
+        helpers.setValue("in good hands")
         break;
       default:
-        setIsActive({ sell: true, lostFound: false, inGoodHands: false });
-        break;  
+        setIsActive({ sell: false, lostFound: false, inGoodHands: false });
+        break;
     }
     console.log(e.currentTarget.value, e.currentTarget.checked);
   };
   return (
-    <CategoryRadioList component="div" name="category">
+    <CategoryRadioList role="group">
       {isActive.sell ? (
         <CategoryLabelActive htmlFor="sell">sell</CategoryLabelActive>
       ) : (
         <CategoryLabel htmlFor="sell">sell</CategoryLabel>
       )}
       <VisualyHiddenRadio
-        defaultChecked
+        {...field}
         onChange={onChangeHandler}
-        name="category"
         id="sell"
         type="radio"
         value="sell"
@@ -52,8 +60,8 @@ export const CategoryRadioButtons = () => {
         <CategoryLabel htmlFor="lost/found">lost/found</CategoryLabel>
       )}
       <VisualyHiddenRadio
+        {...field}
         onChange={onChangeHandler}
-        name="category"
         id="lost/found"
         type="radio"
         value="lost/found"
@@ -66,8 +74,8 @@ export const CategoryRadioButtons = () => {
         <CategoryLabel htmlFor="in good hands">in good hands</CategoryLabel>
       )}
       <VisualyHiddenRadio
+        {...field}
         onChange={onChangeHandler}
-        name="category"
         id="in good hands"
         type="radio"
         value="in good hands"

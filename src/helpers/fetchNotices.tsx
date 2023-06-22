@@ -2,14 +2,7 @@ import axios from "axios";
 import { NewNotice } from "../interfaces/NewNotice";
 
 axios.defaults.baseURL = "https://pet-support-6z4x.onrender.com";
-// const TOKEN =
-//   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYjA4OWFiMDM3YjliOTlhZWQxOWIiLCJlbWFpbCI6InNAbWFpbC5jb20iLCJpYXQiOjE2ODYxNTk5Nzh9.p9DROsLz8GCvzdId5XAYyvNW7Y3cPvblTC_WKgCcVRM";
 
-// const config = {
-//   headers: {
-//     authorization: `${TOKEN}`,
-//   },
-// };
 
 export const getNoticesByCategory = async (category: string) => {
   const response = await axios.get(
@@ -72,7 +65,7 @@ export const addNotice = async ({
     formData.append("dateOfBirth", dateOfBirth);
     formData.append("place", place);
     formData.append("price", price);
-    formData.append("comentary", commentary);
+    formData.append("commentary", commentary);
     const response = await axios.post("/api/notices", formData);
     return response
   } catch (error) {

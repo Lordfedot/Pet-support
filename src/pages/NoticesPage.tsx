@@ -19,14 +19,8 @@ const NoticesPage = () => {
   const [searchQuery, setSearchQuery] = useState<string>();
   const [showModal, setShowModal] = useState(false);
   const { isAuthenticated } = useAppSelector((state) => state.auth);
-  const [catagoriesState, setCategoriesState] = useState({
-    sell: true,
-    lostFound: false,
-    inGoodHands: false,
-    favourite: false,
-    myAdds: false,
-  });
-  const [fetchedNotices, setFetchedNotices] = useState<Array<INotice>>();
+  const [catagoriesState, setCategoriesState] = useState<string>();
+  const [fetchedNotices, setFetchedNotices] = useState<INotice[]>();
   const [isNoticeModalOpen, setNoticeModalState] = useState(false);
   const [fullNoticeId, setFullNoticeId] = useState("");
   const [noticeById, setNoticeById] = useState<INotice>();
@@ -36,8 +30,8 @@ const NoticesPage = () => {
 
   const noticesByTitleFetchHandler = async (title: string) => {
     const notices = await getNoticesByTitle(title);
-    const currentUser = await getCurrentUser();
-    if (notices !== null && notices !== undefined) {
+    if (notices !== null && notices !== undefined && isAuthenticated) {
+      const currentUser = await getCurrentUser();
       const updatedList = notices.data.response.map((notice: INotice) => {
         if (currentUser.data.user.favourite.includes(notice._id)) {
           return { ...notice, isInFavourite: true };
@@ -45,6 +39,8 @@ const NoticesPage = () => {
         return { ...notice, isInFavourite: false };
       });
       setFetchedNotices(updatedList);
+    } else {
+      setFetchedNotices(notices.data.response);
     }
   };
 
@@ -52,13 +48,15 @@ const NoticesPage = () => {
     if (searchQuery !== undefined && searchQuery !== "") {
       noticesByTitleFetchHandler(searchQuery);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   const noticesFetchHandler = async (category: string) => {
     const notices = await getNoticesByCategory(category);
-    console.log(notices);
-    const currentUser = await getCurrentUser();
-    if (notices !== null && notices !== undefined) {
+
+    if (notices !== null && notices !== undefined && isAuthenticated) {
+      console.log(11);
+      const currentUser = await getCurrentUser();
       const updatedList = notices.data.response.map((notice: INotice) => {
         if (currentUser.data.user.favourite.includes(notice._id)) {
           return { ...notice, isInFavourite: true };
@@ -66,13 +64,15 @@ const NoticesPage = () => {
         return { ...notice, isInFavourite: false };
       });
       setFetchedNotices(updatedList);
+    } else {
+      setFetchedNotices(notices.data.response);
     }
   };
 
   const favouriteFetchHandler = async () => {
     const notices = await getFavouriteList();
-    const currentUser = await getCurrentUser();
-    if (notices !== null && notices !== undefined) {
+    if (notices !== null && notices !== undefined && isAuthenticated) {
+      const currentUser = await getCurrentUser();
       const updatedList = notices.data.response.map((notice: INotice) => {
         if (currentUser.data.user.favourite.includes(notice._id)) {
           return { ...notice, isInFavourite: true };
@@ -80,20 +80,22 @@ const NoticesPage = () => {
         return { ...notice, isInFavourite: false };
       });
       setFetchedNotices(updatedList);
+    } else {
+      setFetchedNotices(notices.data.response);
     }
   };
 
   useEffect(() => {
-    if (catagoriesState.sell === true && searchQuery === "") {
+    if (catagoriesState === "sell" && searchQuery === "") {
       noticesFetchHandler("sell");
     }
-    if (catagoriesState.lostFound === true && searchQuery === "") {
+    if (catagoriesState === "lost/found" && searchQuery === "") {
       noticesFetchHandler("lost/found");
     }
-    if (catagoriesState.inGoodHands === true && searchQuery === "") {
+    if (catagoriesState === "in good hands" && searchQuery === "") {
       noticesFetchHandler("in good hands");
     }
-    if (catagoriesState.favourite === true && searchQuery === "") {
+    if (catagoriesState === "favourite" && searchQuery === "") {
       favouriteFetchHandler();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,12 +103,15 @@ const NoticesPage = () => {
 
   const oneNoticeFetchHandler = async (id: string) => {
     const notice = await getNoticesByID(id);
-    const currentUser = await getCurrentUser();
-    if (notice !== null && notice !== undefined) {
+
+    if (notice !== null && notice !== undefined && isAuthenticated) {
+      const currentUser = await getCurrentUser();
       if (currentUser.data.user.favourite.includes(notice.data.response._id)) {
-        setNoticeById({ ...notice.data.response, isInFavourite: true });
+        return setNoticeById({ ...notice.data.response, isInFavourite: true });
       }
-      setNoticeById({ ...notice.data.response, isInFavourite: false });
+      return setNoticeById({ ...notice.data.response, isInFavourite: false });
+    } else {
+      setNoticeById(notice.data.response);
     }
   };
 
@@ -114,58 +119,11 @@ const NoticesPage = () => {
     if (isNoticeModalOpen) {
       oneNoticeFetchHandler(fullNoticeId);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNoticeModalOpen, fullNoticeId]);
 
-  const buttonsStateHandler = (chandedButton: string, buttonState: boolean) => {
-    switch (chandedButton) {
-      case "sell":
-        setCategoriesState({
-          sell: true,
-          lostFound: false,
-          inGoodHands: false,
-          favourite: false,
-          myAdds: false,
-        });
-        break;
-      case "lost/found":
-        setCategoriesState({
-          sell: false,
-          lostFound: true,
-          inGoodHands: false,
-          favourite: false,
-          myAdds: false,
-        });
-        break;
-      case "in good hands":
-        setCategoriesState({
-          sell: false,
-          lostFound: false,
-          inGoodHands: true,
-          favourite: false,
-          myAdds: false,
-        });
-        break;
-      case "favourite adds":
-        setCategoriesState({
-          sell: false,
-          lostFound: false,
-          inGoodHands: false,
-          favourite: true,
-          myAdds: false,
-        });
-        break;
-      case "my adds":
-        setCategoriesState({
-          sell: false,
-          lostFound: false,
-          inGoodHands: false,
-          favourite: false,
-          myAdds: true,
-        });
-        break;
-      default:
-        break;
-    }
+  const buttonsStateHandler = (chandedButton: string) => {
+    setCategoriesState(chandedButton)
   };
 
   const noticeLearnMoreHandler = (data: {

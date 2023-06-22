@@ -4,6 +4,7 @@ import styled from "styled-components";
 import device from "../../../helpers/devices";
 
 
+
 export const AddNoticeTitle = styled.p`
   font-style: normal;
   font-weight: 600;
@@ -59,7 +60,7 @@ export const CategoryLabelActive = styled.label`
   padding: 10px 28px;
 `;
 
-export const CategoryRadioList = styled(Field)`
+export const CategoryRadioList = styled.div`
   display: flex;
   gap: 12px;
 `;
@@ -91,7 +92,7 @@ export const AddNoticeInput = styled(Field)`
   padding: 11px 16px;
 `;
 
-export const AddNoticeArea = styled(Field)`
+export const AddNoticeArea = styled.textarea`
   height: 190px;
   resize: none;
   background-color: ${({ theme }) => theme.colors.bg};

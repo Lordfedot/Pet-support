@@ -4,7 +4,6 @@ import DateInput from "../ModalAddPets/DateInput";
 import { CategoryRadioButtons } from "./CategoryRadioButtons";
 import { SexRadioButtons } from "./SexRadioButtons";
 import {
-  AddNoticeArea,
   AddNoticeButtonList,
   AddNoticeInput,
   AddNoticeIntro,
@@ -18,16 +17,17 @@ import React, { useState, Dispatch, SetStateAction } from "react";
 import { NewNotice } from "../../interfaces/NewNotice";
 import { addNotice } from "../../helpers/fetchNotices";
 import { NewNoticeValidationSchema } from "../../helpers/ValidateAddNoticeForm";
+import TextArea from "../ModalAddPets/TextArea";
 
 const initialValues = {
-  category: "",
   title: "",
+  category: "",
   petName: "",
   dateOfBirth: "",
   breed: "",
   sex: "",
   place: "",
-  avatar: undefined,
+  avatar: null,
   price: "",
   commentary: "",
 };
@@ -39,6 +39,7 @@ export const NoticesAddForm = ({ setShowModal }: Props) => {
   const [page, setPage] = useState(1);
 
   const handleSubmit = async (values: NewNotice) => {
+    console.log(1, );
     const response = await addNotice(values)
     if (response?.status === 201) {
       window.location.reload();
@@ -46,7 +47,11 @@ export const NoticesAddForm = ({ setShowModal }: Props) => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={NewNoticeValidationSchema}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={NewNoticeValidationSchema}
+      onSubmit={handleSubmit}
+    >
       <Form>
         <AddNoticeTitle>Add pet</AddNoticeTitle>
         {page === 1 && (
@@ -59,12 +64,16 @@ export const NoticesAddForm = ({ setShowModal }: Props) => {
           {page === 1 && (
             <>
               <li>
-                <CategoryRadioButtons></CategoryRadioButtons>
+                <CategoryRadioButtons name={"category"}></CategoryRadioButtons>
               </li>
               <li>
                 <AddPetModalLabel htmlFor="title">
                   Title of ad:
-                  <AddNoticeInput name="title" type="text"></AddNoticeInput>
+                  <AddNoticeInput
+                    id="title"
+                    name="title"
+                    type="text"
+                  ></AddNoticeInput>
                 </AddPetModalLabel>
               </li>
               <li>
@@ -89,13 +98,13 @@ export const NoticesAddForm = ({ setShowModal }: Props) => {
               <li>
                 <AddPetModalLabel>
                   The sex:
-                  <SexRadioButtons></SexRadioButtons>
+                  <SexRadioButtons name="sex"></SexRadioButtons>
                 </AddPetModalLabel>
               </li>
               <li>
-                <AddPetModalLabel htmlFor="location">
+                <AddPetModalLabel htmlFor="place">
                   Location:
-                  <AddNoticeInput name="location" type="text"></AddNoticeInput>
+                  <AddNoticeInput name="place" type="text"></AddNoticeInput>
                 </AddPetModalLabel>
               </li>
               <li>
@@ -105,17 +114,10 @@ export const NoticesAddForm = ({ setShowModal }: Props) => {
                 </AddPetModalLabel>
               </li>
               <li>
-                <FileInput name="photo"></FileInput>
+                <FileInput name="avatar"></FileInput>
               </li>
               <li>
-                <AddPetModalLabel htmlFor="comments">
-                  Comments:
-                  <AddNoticeArea
-                    component="textArea"
-                    name="comments"
-                    type="text"
-                  ></AddNoticeArea>
-                </AddPetModalLabel>
+                <TextArea name="commentary"></TextArea>
               </li>
             </>
           )}
