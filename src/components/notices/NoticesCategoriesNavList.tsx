@@ -3,11 +3,11 @@ import { Button } from "../../styles/components/Button.styled";
 import { NoticesNavList } from "../../styles/components/NoticesCategoriesNavList.styled";
 type ButtonProps = {
   children: string;
-  buttonsStateHandler: (chandedButton: string, buttonState: boolean) => void;
+  buttonsStateHandler: (chandedButton: string) => void;
 };
 
 type ListProps = {
-  buttonsStateHandler: (chandedButton: string, buttonState: boolean) => void;
+  buttonsStateHandler: (chandedButton: string) => void;
   isAuthenticated: boolean;
 };
 
@@ -19,7 +19,7 @@ const CategoriesButton = ({ children, buttonsStateHandler }: ButtonProps) => {
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setIsActive(!isActive);
     if (e.currentTarget.textContent !== null) {
-      buttonsStateHandler(e.currentTarget.textContent, !isActive);
+      buttonsStateHandler(e.currentTarget.textContent);
     }
   };
 

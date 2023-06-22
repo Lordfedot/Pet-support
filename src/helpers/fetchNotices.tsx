@@ -3,40 +3,41 @@ import { NewNotice } from "../interfaces/NewNotice";
 
 axios.defaults.baseURL = "https://pet-support-6z4x.onrender.com";
 
-
 export const getNoticesByCategory = async (category: string) => {
   const response = await axios.get(
     `/api/notices/byCategory?category=${category}`
   );
-  return response;
+  return response.data.response;
 };
 
 export const getNoticesByID = async (id: string) => {
   const response = await axios.get(`/api/notice/${id}`);
-  return response;
+  return response.data.response;
 };
 
 export const getNoticesByTitle = async (title: string) => {
   const response = await axios.get(`/api/notices/byTitle?title=${title}`);
-  return response;
+  return response.data.response;
 };
 
 export const updateFavouriteList = async (id: string) => {
-  const response = await axios.patch(
-    `/api/user/favourite`,
-    { noticeId: id }
-  );
-  return response;
+  const response = await axios.patch(`/api/user/favourite`, { noticeId: id });
+  return response.data.response;
 };
 
 export const getFavouriteList = async () => {
   const response = await axios.get(`/api/privat-notices/favourite`);
-  return response;
+  return response.data.response;
+};
+
+export const getPrivatList = async () => {
+  const response = await axios.get(`/api/privat-notices`);
+  return response.data.response;
 };
 
 export const getCurrentUser = async () => {
   const response = await axios.get("/current");
-  return response;
+  return response.data.user;
 };
 
 export const addNotice = async ({
@@ -67,9 +68,8 @@ export const addNotice = async ({
     formData.append("price", price);
     formData.append("commentary", commentary);
     const response = await axios.post("/api/notices", formData);
-    return response
+    return response;
   } catch (error) {
     console.log(error);
-    
   }
 };

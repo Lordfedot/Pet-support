@@ -11,6 +11,7 @@ import {
   getNoticesByCategory,
   getNoticesByID,
   getNoticesByTitle,
+  getPrivatList,
 } from "../helpers/fetchNotices";
 import { NoticesList } from "../components/notices/NoticesList";
 import { useAppSelector } from "../redux/selector";
@@ -32,15 +33,15 @@ const NoticesPage = () => {
     const notices = await getNoticesByTitle(title);
     if (notices !== null && notices !== undefined && isAuthenticated) {
       const currentUser = await getCurrentUser();
-      const updatedList = notices.data.response.map((notice: INotice) => {
-        if (currentUser.data.user.favourite.includes(notice._id)) {
+      const updatedList = notices.map((notice: INotice) => {
+        if (currentUser.favourite.includes(notice._id)) {
           return { ...notice, isInFavourite: true };
         }
         return { ...notice, isInFavourite: false };
       });
       setFetchedNotices(updatedList);
     } else {
-      setFetchedNotices(notices.data.response);
+      setFetchedNotices(notices);
     }
   };
 
@@ -57,31 +58,45 @@ const NoticesPage = () => {
     if (notices !== null && notices !== undefined && isAuthenticated) {
       console.log(11);
       const currentUser = await getCurrentUser();
-      const updatedList = notices.data.response.map((notice: INotice) => {
-        if (currentUser.data.user.favourite.includes(notice._id)) {
+      const updatedList = notices.map((notice: INotice) => {
+        if (currentUser.favourite.includes(notice._id)) {
           return { ...notice, isInFavourite: true };
         }
         return { ...notice, isInFavourite: false };
       });
       setFetchedNotices(updatedList);
     } else {
-      setFetchedNotices(notices.data.response);
+      setFetchedNotices(notices);
     }
   };
-
+  const privateNoticeFetchHandler = async () => {
+    const notices = await getPrivatList();
+    if (notices !== null && notices !== undefined && isAuthenticated) {
+      const currentUser = await getCurrentUser();
+      const updatedList = notices.map((notice: INotice) => {
+        if (currentUser.favourite.includes(notice._id)) {
+          return { ...notice, isInFavourite: true };
+        }
+        return { ...notice, isInFavourite: false };
+      });
+      setFetchedNotices(updatedList);
+    } else {
+      setFetchedNotices(notices);
+    }
+  };
   const favouriteFetchHandler = async () => {
     const notices = await getFavouriteList();
     if (notices !== null && notices !== undefined && isAuthenticated) {
       const currentUser = await getCurrentUser();
-      const updatedList = notices.data.response.map((notice: INotice) => {
-        if (currentUser.data.user.favourite.includes(notice._id)) {
+      const updatedList = notices.map((notice: INotice) => {
+        if (currentUser.favourite.includes(notice._id)) {
           return { ...notice, isInFavourite: true };
         }
         return { ...notice, isInFavourite: false };
       });
       setFetchedNotices(updatedList);
     } else {
-      setFetchedNotices(notices.data.response);
+      setFetchedNotices(notices);
     }
   };
 
@@ -95,9 +110,13 @@ const NoticesPage = () => {
     if (catagoriesState === "in good hands" && searchQuery === "") {
       noticesFetchHandler("in good hands");
     }
-    if (catagoriesState === "favourite" && searchQuery === "") {
+    if (catagoriesState === "my adds" && searchQuery === "") {
+      privateNoticeFetchHandler();
+    }
+    if (catagoriesState === "favourite adds" && searchQuery === "") {
       favouriteFetchHandler();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [catagoriesState, searchQuery]);
 
@@ -106,12 +125,12 @@ const NoticesPage = () => {
 
     if (notice !== null && notice !== undefined && isAuthenticated) {
       const currentUser = await getCurrentUser();
-      if (currentUser.data.user.favourite.includes(notice.data.response._id)) {
-        return setNoticeById({ ...notice.data.response, isInFavourite: true });
+      if (currentUser.favourite.includes(notice._id)) {
+        return setNoticeById({ ...notice, isInFavourite: true });
       }
-      return setNoticeById({ ...notice.data.response, isInFavourite: false });
+      return setNoticeById({ ...notice, isInFavourite: false });
     } else {
-      setNoticeById(notice.data.response);
+      setNoticeById(notice);
     }
   };
 
@@ -123,7 +142,7 @@ const NoticesPage = () => {
   }, [isNoticeModalOpen, fullNoticeId]);
 
   const buttonsStateHandler = (chandedButton: string) => {
-    setCategoriesState(chandedButton)
+    setCategoriesState(chandedButton);
   };
 
   const noticeLearnMoreHandler = (data: {

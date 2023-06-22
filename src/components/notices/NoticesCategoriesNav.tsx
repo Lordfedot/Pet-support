@@ -15,7 +15,7 @@ import { NoticesAddForm } from "./NoticeAddForm";
 
 
 type NawListProps = {
-  buttonsStateHandler: (chandedButton: string, buttonState: boolean) => void;
+  buttonsStateHandler: (chandedButton: string) => void;
   setShowModal: Dispatch<SetStateAction<boolean>>;
   showModal: boolean;
   noticeById: INotice | undefined;
