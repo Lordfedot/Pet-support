@@ -4,6 +4,7 @@ import DateInput from "../ModalAddPets/DateInput";
 import { CategoryRadioButtons } from "./CategoryRadioButtons";
 import { SexRadioButtons } from "./SexRadioButtons";
 import {
+  AddNoticeButtonLi,
   AddNoticeButtonList,
   AddNoticeInput,
   AddNoticeIntro,
@@ -124,31 +125,31 @@ export const NoticesAddForm = ({ setShowModal }: Props) => {
         </FieldsList>
         {page === 1 && (
           <AddNoticeButtonList>
-            <li>
+            <AddNoticeButtonLi>
               <NoticeByIdAddToButton
                 type="button"
                 onClick={() => setShowModal(false)}
               >
                 Cancel
               </NoticeByIdAddToButton>
-            </li>
-            <li>
+            </AddNoticeButtonLi>
+            <AddNoticeButtonLi>
               <NoticeByIdAddToButton type="button" onClick={() => setPage(2)}>
                 Next
               </NoticeByIdAddToButton>
-            </li>
+            </AddNoticeButtonLi>
           </AddNoticeButtonList>
         )}
         {page === 2 && (
           <AddNoticeButtonList>
-            <li>
+            <AddNoticeButtonLi>
               <NoticeByIdAddToButton type="button" onClick={() => setPage(1)}>
                 Back
               </NoticeByIdAddToButton>
-            </li>
-            <li>
+            </AddNoticeButtonLi>
+            <AddNoticeButtonLi>
               <NoticeByIdAddToButton type="submit">Done</NoticeByIdAddToButton>
-            </li>
+            </AddNoticeButtonLi>
           </AddNoticeButtonList>
         )}
       </Form>

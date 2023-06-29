@@ -20,6 +20,7 @@ type ListProps = {
     isNoticeOpen: boolean;
     noticeId: string;
   }) => void;
+  onFavouriteChange: (id: string) => void;
   isAuthenticated: boolean;
 };
 
@@ -27,14 +28,13 @@ export const NoticesList = ({
   fetchedNotices,
   noticeLearnMoreHandler,
   isAuthenticated,
+  onFavouriteChange,
 }: ListProps) => {
   const onAddToFavouriteClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    const response = await updateFavouriteList(e.currentTarget.id);
-    console.log(response.data);
-
-    window.alert(response.data.message);
+    onFavouriteChange(e.currentTarget.id);
+    await updateFavouriteList(e.currentTarget.id);
   };
 
   const onLoadMoreClick = (

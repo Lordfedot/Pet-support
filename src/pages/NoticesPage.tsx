@@ -20,7 +20,7 @@ const NoticesPage = () => {
   const [searchQuery, setSearchQuery] = useState<string>();
   const [showModal, setShowModal] = useState(false);
   const { isAuthenticated } = useAppSelector((state) => state.auth);
-  const [catagoriesState, setCategoriesState] = useState<string>();
+  const [catagoriesState, setCategoriesState] = useState<string>("sell");
   const [fetchedNotices, setFetchedNotices] = useState<INotice[]>();
   const [isNoticeModalOpen, setNoticeModalState] = useState(false);
   const [fullNoticeId, setFullNoticeId] = useState("");
@@ -153,12 +153,36 @@ const NoticesPage = () => {
     setFullNoticeId(data.noticeId);
   };
 
+  const onFavouriteChange = (id: string) => {
+    if (catagoriesState === "favourite adds") {
+      const updateNoticeList = fetchedNotices?.filter(
+        (notice) => notice._id !== id
+      );
+      setFetchedNotices(updateNoticeList)
+    } else {
+      const updatedNoticeList = fetchedNotices?.map((notice) => {
+        if (notice._id === id) {
+          notice.isInFavourite = !notice.isInFavourite;
+          return notice;
+        }
+        return notice;
+      });
+      setFetchedNotices(updatedNoticeList);
+    };
+  };
+
+  const onDelete = (id: string) => {
+    const updatedList = fetchedNotices?.filter(notice => notice._id !== id)
+    setFetchedNotices(updatedList)
+  }
+
   return (
     <Section>
       <Container>
         <MainTitle>Find your favorite pet</MainTitle>
         <NoticesSearch querryHandler={querryHandler} />
         <NoticesCategoriesNav
+          onFavouriteChange={onFavouriteChange}
           isAuthenticated={isAuthenticated}
           buttonsStateHandler={buttonsStateHandler}
           setShowModal={setShowModal}
@@ -166,9 +190,11 @@ const NoticesPage = () => {
           noticeById={noticeById}
           setNoticeModalState={setNoticeModalState}
           isNoticeModalOpen={isNoticeModalOpen}
+          onDelete={onDelete}
         />
         {fetchedNotices && (
           <NoticesList
+            onFavouriteChange={onFavouriteChange}
             isAuthenticated={isAuthenticated}
             fetchedNotices={fetchedNotices}
             noticeLearnMoreHandler={noticeLearnMoreHandler}

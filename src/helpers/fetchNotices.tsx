@@ -73,3 +73,8 @@ export const addNotice = async ({
     console.log(error);
   }
 };
+
+export const deleteNotice = async (id: string) => {
+  const response = await axios.delete(`/api/notice/${id}`);
+  return response.data.response;
+};

@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { Icon } from "../../../components/svgIcon";
+import device from "../../../helpers/devices";
 
 export const NoticeByIdContainer = styled.div`
-  width: 664px;
+  width: 100%;
   padding: 32px 20px;
   display: flex;
   flex-direction: column;
@@ -9,9 +11,16 @@ export const NoticeByIdContainer = styled.div`
 
 export const NoticeDescriptionContainer = styled.div`
   display: flex;
+  flex-direction: column;
   position: relative;
   gap: 20px;
   margin-bottom: 28px;
+  @media ${device.tablet} {
+    flex-direction: row;
+  }
+  @media ${device.desktop} {
+    flex-direction: row;
+  }
 `;
 
 export const NoticeByIdCategory = styled.p`
@@ -96,22 +105,35 @@ export const NoticeByIdComentsData = styled.span`
 
 export const NoticeByIdButtonsList = styled.ul`
   display: flex;
-  align-self: flex-end;
+  flex-direction: column;
+
   gap: 12px;
   padding-right: 20px;
+  @media ${device.tablet} {
+    flex-direction: row;
+    align-self: flex-end;
+  }
+  @media ${device.desktop} {
+    flex-direction: row;
+    align-self: flex-end;
+  }
 `;
 export const NoticeByIdAddToButton = styled.button`
   border: 2px solid #f59256;
   border-radius: 40px;
   background-color: transparent;
-  width: 160px;
+  width: 100%;
   padding: 9px 0;
-
   text-align: center;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.38;
-  letter-spacing: 0.04em;
+  @media ${device.tablet} {
+    width: 160px;
+  }
+  @media ${device.desktop} {
+    width: 160px;
+  }
   :hover {
     background-color: #f59256;
     color: #fff;
@@ -125,7 +147,7 @@ export const NoticeByIdContactButton = styled.a`
   border: 2px solid #f59256;
   border-radius: 40px;
   background-color: transparent;
-  width: 160px;
+  width: 100%;
   display: block;
   padding: 9px 0;
 
@@ -134,13 +156,25 @@ export const NoticeByIdContactButton = styled.a`
   font-size: 16px;
   line-height: 1.38;
   letter-spacing: 0.04em;
+  @media ${device.tablet} {
+    width: 160px;
+  }
+  @media ${device.desktop} {
+    width: 160px;
+  }
 
   :hover {
     background-color: #f59256;
     color: #fff;
+    fill: #fff;
   }
   :focus {
     background-color: #f59256;
     color: #fff;
+    fill: #fff;
   }
+`;
+
+export const IconDelete = styled(Icon)`
+  fill: #f59256;
 `;

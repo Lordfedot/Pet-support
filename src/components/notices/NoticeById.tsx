@@ -1,4 +1,8 @@
-import { updateFavouriteList } from "../../helpers/fetchNotices";
+import {
+  deleteNotice,
+  getCurrentUser,
+  updateFavouriteList,
+} from "../../helpers/fetchNotices";
 import { INotice } from "../../interfaces/INotice";
 import {
   NoticeByIdAvatar,
@@ -16,25 +20,57 @@ import {
   NoticeByIdButtonsList,
   NoticeByIdContactButton,
   NoticeByIdAddToButton,
+  IconDelete,
 } from "../../styles/components/notices/NoticeById.styled";
 import { Icon } from "../svgIcon";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 type NoticeProps = {
   data: INotice;
   isAuthenticated: boolean;
+  setShowModal: Dispatch<SetStateAction<boolean>>;
+  onFavouriteChange: (id: string) => void;
+  onDelete: (id: string) => void;
 };
 
-export const NoticesById = ({ data, isAuthenticated }: NoticeProps) => {
-  const telRef: string = `tel: ${data.ownerPhone}`
-  const mailRef: string = `mailto: ${data.ownerEmail}`
-  
+export const NoticesById = ({
+  data,
+  isAuthenticated,
+  setShowModal,
+  onFavouriteChange,
+  onDelete
+}: NoticeProps) => {
+  const [isPrivat, setIsPrivat] = useState(false);
+  const [isFavourite, setFavourite] = useState(data.isInFavourite);
+  const telRef: string = `tel: ${data.ownerPhone}`;
+  const mailRef: string = `mailto: ${data.ownerEmail}`;
+
+  const privatStateHandler = async () => {
+    const currentUser = await getCurrentUser();
+    if (currentUser._id === data.owner) {
+      setIsPrivat(true);
+    } else {
+      setIsPrivat(false);
+    }
+  };
+
+  useEffect(() => {
+    privatStateHandler();
+  });
+
+  const onDeleteClick = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    onDelete(e.currentTarget.id)
+    await deleteNotice(e.currentTarget.id);
+    await setShowModal(false);
+  };
+
   const onAddToFavouriteClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => { 
-    const response = await updateFavouriteList(e.currentTarget.id);
-    data.isInFavourite = !data.isInFavourite;
-    console.log(response.data);
-
-    await window.alert(response.data.message);
+  ) => {
+    onFavouriteChange(e.currentTarget.id);
+    await updateFavouriteList(e.currentTarget.id);
+    await setFavourite((prevState) => !prevState);
   };
 
   console.log(data);
@@ -112,16 +148,29 @@ export const NoticesById = ({ data, isAuthenticated }: NoticeProps) => {
               id={data._id}
               onClick={onAddToFavouriteClick}
             >
-              {data.isInFavourite === true ? "Remove from" : "Add to"}
+              {isFavourite === true ? "Remove from" : "Add to"}
               <Icon iconId={"iconFavourite"} width={16} height={16}></Icon>
             </NoticeByIdAddToButton>
           </li>
         )}
-        <li>
-          <NoticeByIdContactButton href="tel: +111-11-11">
-            Contact
-          </NoticeByIdContactButton>
-        </li>
+        {isPrivat ? (
+          <li>
+            <NoticeByIdAddToButton id={data._id} onClick={onDeleteClick}>
+              Delete
+              <IconDelete
+                iconId={"iconDelete"}
+                width={16}
+                height={16}
+              ></IconDelete>
+            </NoticeByIdAddToButton>
+          </li>
+        ) : (
+          <li>
+            <NoticeByIdContactButton href="tel: +111-11-11">
+              Contact
+            </NoticeByIdContactButton>
+          </li>
+        )}
       </NoticeByIdButtonsList>
     </NoticeByIdContainer>
   );

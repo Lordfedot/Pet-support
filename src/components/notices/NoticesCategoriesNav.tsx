@@ -22,6 +22,8 @@ type NawListProps = {
   isNoticeModalOpen: boolean;
   isAuthenticated: boolean;
   setNoticeModalState: Dispatch<SetStateAction<boolean>>;
+  onFavouriteChange: (id: string) => void;
+  onDelete: (id: string) => void;
 };
 
 const NoticesCategoriesNav = ({
@@ -32,11 +34,16 @@ const NoticesCategoriesNav = ({
   isNoticeModalOpen,
   isAuthenticated,
   setNoticeModalState,
+  onFavouriteChange,
+  onDelete,
 }: NawListProps) => {
   return (
     <div>
       <NoticesNavWrapper>
-        <NoticesCategoriesNavList buttonsStateHandler={buttonsStateHandler} isAuthenticated={isAuthenticated}/>
+        <NoticesCategoriesNavList
+          buttonsStateHandler={buttonsStateHandler}
+          isAuthenticated={isAuthenticated}
+        />
 
         <TablerOrDesctop>
           <AddPetWrapper>
@@ -56,14 +63,14 @@ const NoticesCategoriesNav = ({
         <Modal setShowModal={setShowModal} showModal={showModal}>
           <NoticesAddForm setShowModal={setShowModal}></NoticesAddForm>
         </Modal>
-        <Modal
-          setShowModal={setNoticeModalState}
-          showModal={isNoticeModalOpen}
-        >
+        <Modal setShowModal={setNoticeModalState} showModal={isNoticeModalOpen}>
           {noticeById && (
             <NoticesById
+              onDelete = {onDelete}
+              onFavouriteChange={onFavouriteChange}
               data={noticeById}
               isAuthenticated={isAuthenticated}
+              setShowModal={setNoticeModalState}
             ></NoticesById>
           )}
         </Modal>
