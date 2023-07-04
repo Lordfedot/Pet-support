@@ -1,15 +1,17 @@
 import {
   UserNavButton,
   RiAccountCircleFillStyled,
-} from "../styles/components/UserNav.styled";
-import { useAppSelector } from "../redux/selector";
+  Avatar
+} from "../../styles/components/UserNav.styled";
+import { useAppSelector } from "../../redux/selector";
 
 const UserNav = () => {
   const { user } = useAppSelector((state) => state.auth);
-
+  
   return (
     <UserNavButton to={"/user"}>
-      <RiAccountCircleFillStyled />
+      {!user?.avatar && <RiAccountCircleFillStyled />}
+      {user?.avatar && <Avatar src={user?.avatar} alt={user?.name} />}
       {user?.name}
     </UserNavButton>
   );

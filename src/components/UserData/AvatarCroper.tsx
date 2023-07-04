@@ -23,9 +23,10 @@ import { updateUser } from "../../helpers/Api";
 type Props = {
   file: string | null;
   setSrc: Dispatch<SetStateAction<string>>;
+  setShowModal: Dispatch<SetStateAction<boolean>>
 };
 
-export default function AvatarCroper({ file, setSrc }: Props) {
+export default function AvatarCroper({ file, setSrc,setShowModal }: Props) {
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
@@ -57,9 +58,11 @@ export default function AvatarCroper({ file, setSrc }: Props) {
     if (newFile) {
       const { previewUrl, file } = newFile;
       const result = await updateUser('avatar', file)
-      console.log(result);
       
       setSrc(previewUrl);
+      if (result?.status === 201) {
+        setShowModal(false)
+      }
     }
   };
   useEffect(() => {

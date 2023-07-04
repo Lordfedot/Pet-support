@@ -1,20 +1,21 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   AddPetButton,
   StyledAiOutlinePlus,
   PetsDataWrapper,
   AddPetButtonWrapper,
   PetsWrapper
-} from "../styles/components/PetsData.styled";
-import { Modal } from "./Modal";
-import { Pet } from "../interfaces/Pet";
+} from "../../styles/components/PetsData.styled";
+import { Modal } from "../Modal";
+import { Pet } from "../../interfaces/Pet";
 import PetsList from "./PetsList";
-import ModalAddPets from "./ModalAddPets/ModalsAddPets";
+import ModalAddPets from "../ModalAddPets/ModalsAddPets";
 type Props = {
   pets: Pet[];
+  setPets: Dispatch<SetStateAction<Pet[]>>
 };
 
-const PetsData = ({ pets }: Props) => {
+const PetsData = ({ pets, setPets }: Props) => {
   const [showModal, setShowModal] = useState(false);
 
   if (!pets) return <></>;
@@ -29,9 +30,9 @@ const PetsData = ({ pets }: Props) => {
           </AddPetButton>
         </AddPetButtonWrapper>
       </PetsDataWrapper>
-      <PetsList pets={pets} />
+      <PetsList setPets={setPets} pets={pets} />
       <Modal setShowModal={setShowModal} showModal={showModal}>
-        <ModalAddPets setShowModal={setShowModal}/>
+        <ModalAddPets setPets={setPets} setShowModal={setShowModal}/>
       </Modal>
     </PetsWrapper>
   );

@@ -85,7 +85,7 @@ const UserData = ({ user }: Props) => {
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <input type="file" onChange={handleFileChange} />
         <>
-          <AvatarCroper setSrc={setSrc} file={file}></AvatarCroper>
+          <AvatarCroper setShowModal={setShowModal} setSrc={setSrc} file={file}></AvatarCroper>
         </>
       </Modal>
     </>

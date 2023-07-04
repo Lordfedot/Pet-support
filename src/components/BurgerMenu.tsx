@@ -1,4 +1,4 @@
-import { ReactNode, Dispatch, SetStateAction } from "react";
+import { ReactNode, Dispatch, SetStateAction, useEffect } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import {
   BurgerWrapper,
@@ -7,27 +7,32 @@ import {
 } from "../styles/components/BurgerMenu.styled";
 import Logo from "./Logo";
 import { createPortal } from "react-dom";
+import { useLocation } from "react-router-dom";
 
 type Props = {
-  children: ReactNode;
   setBurgerShow: Dispatch<SetStateAction<boolean>>;
+  burgerShow: boolean;
+  children: ReactNode;
 };
 
-const BurgerMenu = ({ children, setBurgerShow }: Props) => {
-
+const BurgerMenu = ({children, burgerShow, setBurgerShow }: Props) => {
+  const location = useLocation();
+  useEffect(()=>{
+    setBurgerShow(false)
+  },[location, setBurgerShow])
+  
   return createPortal(
-    <BurgerWrapper>
-      <BurgerLayout>
+    <>
+      <BurgerLayout burgerShow={burgerShow}>
         <BurgerWrapper>
           <Logo />
-
           <BurgerCloseButton onClick={() => setBurgerShow(false)}>
             <IoCloseOutline size={"20px"} />
           </BurgerCloseButton>
+          {children}
         </BurgerWrapper>
-        {children}
       </BurgerLayout>
-    </BurgerWrapper>,
+    </>,
     document.getElementById("root") as HTMLElement
   );
 };

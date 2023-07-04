@@ -3,8 +3,23 @@ import device from "../../helpers/devices";
 import { Button } from "./Button.styled";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { RxCrossCircled } from "react-icons/rx";
+import { Form } from "formik";
+type Props = {
+  isError?: boolean;
+  isValid?: boolean;
+};
 
-export const Form = styled.form`
+const getBorderColor = (isError?: boolean, isValid?: boolean) => {
+  if (isValid) {
+    return "red";
+  } else if (isError) {
+    return "green";
+  } else {
+    return "rgba(245, 146, 86, 0.5)";
+  }
+};
+
+export const FormStyled = styled(Form)`
   max-width: 420px;
   margin-left: auto;
   margin-right: auto;
@@ -24,6 +39,7 @@ export const AiFillCheckCircleStyled = styled(AiFillCheckCircle)`
   width: 20px;
   height: 20px;
   color: green;
+  transition: all 0.4s ease;
 `;
 
 export const RxCrossCircledStyled = styled(RxCrossCircled)`
@@ -33,6 +49,7 @@ export const RxCrossCircledStyled = styled(RxCrossCircled)`
   width: 20px;
   height: 20px;
   color: red;
+  transition: all 0.4s ease;
 `;
 export const FormList = styled.ul`
   margin-top: 40px;
@@ -46,20 +63,16 @@ export const FormItem = styled.li`
   position: relative;
 `;
 
-export const FormInput = styled.input`
+export const FormInput = styled.input<Props>`
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   border-radius: ${({ theme }) => theme.radius};
   padding: 9px 12px;
 
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
+  border: 1px solid
+    ${({ isValid, isError }) => getBorderColor(isValid, isError)};
   width: 100%;
-  &.invalid {
-    border: 1px solid red;
-  }
-  &.valid {
-    border: 1px solid green;
-  }
+  transition: all 0.4s ease;
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.primary};
   }
@@ -70,8 +83,9 @@ export const FormButton = styled(Button)`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.white};
-
-  &:focus {
+  transition: all 0.3s ease;
+  &:focus,
+  &:hover {
     background-color: transparent;
     color: ${({ theme }) => theme.colors.text};
   }
@@ -104,16 +118,19 @@ export const ButtonWrapper = styled.div`
   gap: 12px;
 `;
 
-export const ErrorMessage = styled.p`
+export const ErrorMessage = styled.p<Props>`
   position: absolute;
   bottom: -17px;
   left: 20px;
   font-size: 14px;
   line-height: 19px;
-
+  transition: opacity 0.3s ease-in-out;
+  opacity: ${({ isError }) => (isError ? 1 : 0)};
   color: #e2001a;
 `;
 
-export const ValidMessage = styled(ErrorMessage)`
+export const ValidMessage = styled(ErrorMessage)<Props>`
+  opacity: ${({ isValid }) => (isValid ? 1 : 0)};
+  transition: opacity 0.3s ease-in-out;
   color: green;
 `;

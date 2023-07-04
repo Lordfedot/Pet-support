@@ -36,6 +36,7 @@ export const UserDataInput = styled.input`
   padding: 4px 18px;
   border-radius: ${({ theme }) => theme.radius};
   background-color: ${({ theme }) => theme.colors.bg};
+  
   &:focus {
     outline: 1px solid ${({ theme }) => theme.colors.primary};
   }
@@ -64,6 +65,10 @@ export const CheckButton = styled.button<Prop>`
   border-radius: 50%;
   border: none;
   color: ${({ theme }) => theme.colors.primary};
+  transition: all 0.3s ease;
+  &:hover {
+    color: ${({ theme }) => theme.colors.secondary};
+  }
 
   @media ${device.tablet} {
     padding: 8px;

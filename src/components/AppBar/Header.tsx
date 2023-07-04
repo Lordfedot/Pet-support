@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
-import Logo from "./Logo";
+import Logo from "../Logo";
 import Nav from "./Nav";
-import BurgerMenu from "./BurgerMenu";
+import BurgerMenu from "../BurgerMenu";
 import {
   BoxHeader,
   BurgerButton,
   GiHamburgerMenuStyled,
   TabletWrapper,
-} from "../styles/components/Header.styled";
-import { Desktop, Mobile, Tablet } from "../helpers/mediaQuery";
+} from "../../styles/components/Header.styled";
+import { Desktop, Mobile, Tablet } from "../../helpers/mediaQuery";
+
 import AuthNav from "./AuthNav";
 import UserNav from "./UserNav";
-import { Container } from "../styles/components/Container.styled";
-import { useAppSelector } from "../redux/selector";
+import { Container } from "../../styles/components/Container.styled";
+import { useAppSelector } from "../../redux/selector";
 
 const Header = () => {
   const [burgerShow, setBurgerShow] = useState(false);
@@ -36,11 +37,9 @@ const Header = () => {
             <BurgerButton onClick={() => setBurgerShow(true)} type="button">
               <GiHamburgerMenuStyled />
             </BurgerButton>
-            {burgerShow && (
-              <BurgerMenu setBurgerShow={setBurgerShow}>
-                <Nav />
-              </BurgerMenu>
-            )}
+            <BurgerMenu burgerShow={burgerShow} setBurgerShow={setBurgerShow}>
+              <Nav />
+            </BurgerMenu>
           </TabletWrapper>
         </Tablet>
 
@@ -48,12 +47,11 @@ const Header = () => {
           <BurgerButton onClick={() => setBurgerShow(true)} type="button">
             <GiHamburgerMenuStyled />
           </BurgerButton>
-          {burgerShow && (
-            <BurgerMenu setBurgerShow={setBurgerShow}>
-              {isAuthenticated ? <UserNav /> : <AuthNav />}
-              <Nav />
-            </BurgerMenu>
-          )}
+
+          <BurgerMenu burgerShow={burgerShow} setBurgerShow={setBurgerShow}>
+            {isAuthenticated ? <UserNav /> : <AuthNav />}
+            <Nav />
+          </BurgerMenu>
         </Mobile>
       </BoxHeader>
     </Container>

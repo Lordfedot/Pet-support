@@ -14,7 +14,7 @@ export const UserDataWrapper = styled.div`
     flex-direction: row-reverse;
     border-radius: 0px 20px 20px 0px;
   }
-  @media ${device.desktop}{
+  @media ${device.desktop} {
     display: block;
     max-height: 560px;
     width: 35%;
@@ -30,6 +30,12 @@ export const DataImg = styled.img`
   width: 233px;
   height: 233px;
   border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.5s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 export const EditPhoto = styled.button`
   display: flex;
@@ -43,6 +49,11 @@ export const EditPhoto = styled.button`
   border: none;
 
   color: ${({ theme }) => theme.colors.text};
+  transition: all 0.5s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 export const MdAddAPhotoStyled = styled(MdAddAPhoto)`
@@ -62,5 +73,4 @@ export const UserDataList = styled.ul`
   @media ${device.tablet} {
     width: 100%;
   }
-  
 `;

@@ -30,7 +30,7 @@ export const StyledLink = styled(Link)`
   border: 1px solid ${({ theme }) => theme.colors.primary};
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: ${({ theme }) => theme.radius};
-
+  transition: all 0.3s ease;
   &:hover {
     background-color: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.white};
@@ -40,6 +40,7 @@ export const StyledRegistrationLink = styled(StyledLink)`
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.white};
   border-radius: ${({ theme }) => theme.radius};
+  transition: all 0.3s ease;
   &:hover {
     color: ${({ theme }) => theme.colors.text};
     background-color: ${({ theme }) => theme.colors.white};
