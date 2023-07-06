@@ -16,7 +16,7 @@ root.render(
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <ThemeProvider theme={theme}>
-          <BrowserRouter basename="pet-support/">
+          <BrowserRouter basename="Pet-support">
             <App />
           </BrowserRouter>
         </ThemeProvider>
