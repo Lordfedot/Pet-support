@@ -5,13 +5,15 @@ export const Notices = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
+  justify-content: center;
+
 `;
 
 export const NoticesItem = styled.li`
   position: relative;
   border-radius: 0 0 40px 40px;
   width: 288px;
-  height: 606px;
+  height: 616px;
   background-color: #ffffff;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
 `;
@@ -63,6 +65,8 @@ export const NoticeCategory = styled.p`
 
 export const NoticeDescriptionContainer = styled.div`
   padding: 20px;
+  height: 248px;
+  margin-bottom: 20px;
 `;
 
 export const NoticeTitle = styled.p`
@@ -79,7 +83,6 @@ export const NoticeDescriptionList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-bottom: 20px;
 `;
 
 export const NoticeDescriptionItem = styled.li`
